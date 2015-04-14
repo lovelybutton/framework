@@ -1,0 +1,364 @@
+`<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>PROTO: Button</title>
+
+    
+    <script src="assets/script/lib.js" type="text/javascript"></script>
+    <script src="assets/script/script.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="assets/css/global.css">
+
+
+    <!-- base proto stylesheets and script files -->
+    <script src="assets/script/proto-script.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="assets/css/proto-style.css">
+
+    <!-- highlight.js -->
+    <script src="assets/script/highlight.js/highlight.pack.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="assets/css/highlight.js/default.css">
+    <link rel="stylesheet" href="assets/css/highlight.js/googlecode.css">
+
+    <style>
+    ul li{padding:5px 0; position:relative;}
+    .section-wrap#button-tool {border:none;padding:0;}
+
+    body{margin:0; }
+    #tool-wrap {border:1px solid #bfc4c8;margin-bottom:3em;border-top:3px solid #0c51a3;}
+    h2 {margin-bottom:1.25em;}
+
+    .options-row{background:#f0f3f5; border-bottom:1px solid #bfc4c8; padding:10px; overflow:hidden;}
+    .box{float:left; margin-right:20px; position:relative; overflow:hidden;}
+    .box.checkbox{padding-top:20px; width:80px;}
+    label{display:block; font:normal 11px/17px Verdana, Geneva, sans-serif; color:#333;}
+    label.for-checkbox{margin:1px 0 0 22px;}
+    select{width:100px;}
+    input.checkbox{float:left;}
+    input.text{height:33px; width:50%; font:12px Verdana, sans-serif; padding:7px;color:#8C9BAC;}
+    label.for-text{font:normal 12px/33px Verdana, sans-serif; padding:0 10px 0 0; float:left;}
+    #markup-wrap{font:normal 11px/29px Verdana, sans-serif; display:block; color:#fff; overflow:hidden; background:#8c9bac;}
+    #markup-wrap span{display:block; padding:0 10px;}
+    #markup-wrap a{color:#283545;}
+    .markup-title{background:#283545;}
+    #output-wrap, .notes{padding:20px;}
+    #tool-output-markup{font:normal 11px/25px Verdana, sans-serif;}
+    #tool-output-markup span{background:none repeat scroll 0 0 #fff; border:1px solid #D4E0E8; border-radius:4px; padding:3px 6px; line-height:21px;}
+    #tool-button-color, #tool-button-icon{width:150px;}
+    </style>
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+        generateButton();
+
+        $('select').change(function(){
+            generateButton();
+        });
+        $('#tool-sample-input').keyup(function(){
+            generateButton();
+        });
+        $('.reset').click(function(){
+            $('select').children('option').removeAttr('selected');
+            $('select').children('option:first').attr('selected', 'selected');
+            $('#tool-sample-input').val('Try It Now');
+            generateButton();
+            return false;
+        });
+        $('#tool-sample-input').blur(function(){
+            if(!$(this).val()){
+                $(this).val('Try It Now');
+                $(this).trigger('keyup');
+            }
+        });
+        $('#tool-sample-input').focus(function(){
+            if($(this).val() == 'Try It Now'){
+                $(this).val('');
+            }
+        });
+    });
+    function generateButton(){
+        var btnClasses = "<span>btn</span> ";
+        var icoClasses = "<span>ico</span> <span>ico-btn</span> ";
+        $('#tool-wrap select').each(function(index){
+            if($(this).attr('name') == "tool-button-color"){
+                $(this).children('option').each(function(index){
+                    $(this).removeAttr('disabled');
+                    if(!$(this).hasClass($('#tool-button-type').children('option:selected').attr('class'))){
+                        $(this).attr('disabled', 'disabled');
+                    }
+                    if($(this).attr('disabled') && $(this).attr('selected')){
+                        $(this).removeAttr('selected');
+                        $(this).siblings('option:first').attr('selected', 'selected');
+                    }
+                });
+                if($(this).children('option:selected').val().length > 0){
+                    btnClasses += '<span>' + $(this).children('option:selected').val() + '</span> ';
+                }
+            }
+            else if($(this).attr('name') != "tool-button-icon"){
+                if($(this).children('option:selected').val().length > 0){
+                    btnClasses += '<span>' + $(this).children('option:selected').val() + '</span> ';
+                }
+            }
+            else{
+                $(this).children('option').each(function(index){
+                    $(this).removeAttr('disabled');
+                    if(!$(this).hasClass($('#tool-button-type').children('option:selected').attr('class'))){
+                        $(this).attr('disabled', 'disabled');
+                    }
+                    if($(this).attr('disabled') && $(this).attr('selected')){
+                        $(this).removeAttr('selected');
+                        $(this).siblings('option:enabled').first().attr('selected', 'selected');
+                    }
+                });
+                if($(this).children('option:selected').val().length > 0){
+                    icoClasses += '<span>' + $(this).children('option:selected').val() + '</span>';
+                }
+            }
+        });
+
+        btnClasses = btnClasses.slice(0, btnClasses.length - 1);
+        var displayMarkup = '&lt;a href="#" class="' + btnClasses + '"&gt;';
+        var actualMarkup = '<a href="#" class="' + btnClasses + '">';
+        if($('#tool-button-type').children('option:selected').val() == 'btn-round'){
+            displayMarkup += '&lt;b&gt;&lt;/b&gt;';
+            actualMarkup += '<b></b>';
+        }
+        displayMarkup += '<strong>' + $('#tool-sample-input').val() + '</strong>';
+        actualMarkup += $('#tool-sample-input').val();
+
+        if($('#tool-button-icon').children('option:selected').val().length > 0){
+            displayMarkup += '&lt;i class="' + icoClasses + '"&gt;&lt;/i&gt;';
+            actualMarkup += '<i class="' + icoClasses + '"></i>';
+        }
+        displayMarkup += '&lt;/a&gt;';
+        actualMarkup += '</a>';
+        actualMarkup = actualMarkup.replace(/<span>/g, "");
+        actualMarkup = actualMarkup.replace(/<\/span>/g, "");
+
+        $('#tool-output-markup').html(displayMarkup);
+        $('#output-wrap').html(actualMarkup);
+    }
+</script>
+</head>
+
+<body>
+    <div id="global_container">
+        <nav class="pro-nav">
+            <div class="pro-home"><a href="../proto/">Proto Home</a></div>
+            <div class="pro-nav-expandable expandableSet">
+                <dl class="pro-menu">
+                    <dt class="pro-menu-title"><i class="ico ico-menu"></i><div class="title-text">PROTO MENU</div></dt>
+                    <dd class="pro-menu-body clearfix">
+                            <div class="pro-nav-cat">Modules</div>
+                        <div class="pro-nav-cat-wrap">
+                            <ul class="pro-nav-list clearfix">
+                                <li class="pro-nav-background"><a href="background.html">Background</a></li>
+                                <li class="pro-nav-border"><a href="border.html">Border</a></li>
+                                <li class="pro-nav-button current"><a href="button.html">Button</a></li>
+                                <li class="pro-nav-expandable-set"><a href="expandable-set.html">Expandable Set</a></li>
+                                <li class="pro-nav-flag"><a href="flag.html">Flag</a></li>
+                                <li class="pro-nav-form"><a href="form.html">Form</a></li>
+                                <li class="pro-nav-grid"><a href="grid.html">Grid</a></li>
+                                </ul>
+                        </div>
+                        <div class="pro-nav-cat-wrap">
+                            <ul class="pro-nav-list clearfix">
+                                <li class="pro-nav-icon"><a href="icon.html">Icon</a></li>
+                                <li class="pro-nav-modal"><a href="modal.html">Modal</a></li>
+                                <li class="pro-nav-tab"><a href="tab.html">Tab</a></li>
+                                <li class="pro-nav-table"><a href="table.html">Table</a></li>
+                                <li class="pro-nav-thumbnail"><a href="thumbnail.html">Thumbnail</a></li>
+                                <li class="pro-nav-typography"><a href="typography.html">Typography</a></li>
+                                
+                            </ul>
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+        </nav>
+
+        <div class="rowGroup mainContent" id="mc">
+
+            <section class="row pattern-C flush-bottom">
+                <div class="row-inner">
+                    <article class="C has-toc">
+                        <h1 class="margin-bottom">Buttons</h1>
+                        <div class="toc-wrap">
+                            <p class="toc-title">Table of Contents:</p>
+                            <ul class="toc list-inline-block"></ul>
+                        </div>
+                        <h2 class="section-title margin-bottom">Button tool</h2>
+                        <div class="section-wrap usage" id="button-tool">
+                            <div id="tool-wrap">
+                                <div class="options-row">
+                                    <div class="box">
+                                        <label for="tool-button-type">Type</label>
+                                        <select name="tool-button-type" id="tool-button-type">
+                                            <option class="medium" value="" selected>Default</option>
+                                            <option class="small" value="btn-small">Small</option>
+                                            <option class="large" value="btn-large">Large</option>
+                                            <option class="rounded" value="btn-round">Rounded</option>
+                                        </select>
+                                    </div>
+                                    <div class="box">
+                                        <label for="tool-button-color">Color</label>
+                                        <select name="tool-button-color" id="tool-button-color">
+                                            <option class="small medium large rounded" value="" selected>Default (dark gray)</option>
+                                            <option class="small medium large rounded" value="btn-blue">Blue</option>
+                                            <option class="small medium large rounded" value="btn-yellow">Yellow</option>
+                                            <option class="small medium large" value="btn-light-grey">Light Grey</option>
+                                        </select>
+                                    </div>
+                                    <div class="box">
+                                        <label for="tool-button-size">Size</label>
+                                        <select name="tool-button-size" id="tool-button-size">
+                                            <option value="" selected>Default</option>
+                                            <option value="btn-fill">Fill</option>
+                                            <option value="btn-half-fill">Half Fill</option>
+                                            <option value="btn-quarter-fill">Quarter Fill</option>
+                                            <option value="btn-inline">Inline</option>
+                                        </select>
+                                    </div>
+                                    <div class="box">
+                                        <label for="tool-button-icon">Icon</label>
+                                        <select name="tool-button-icon" id="tool-button-icon">
+                                            <option class="small medium large" value="" selected>None</option>
+                                            <option class="large rounded" value="ico-arrow-right-lg">Arrow right large</option>
+                                            <option class="medium" value="ico-arrow-right-md">Arrow right medium</option>
+                                            <option class="small" value="ico-arrow-right-sm">Arrow right small</option>
+                                            <option class="rounded" value="ico-arrow-right-circled-lg">Arrow right circled</option>
+                                            <option class="small" value="ico-arrow-down-sm">Arrow down small</option>
+                                            <option class="large rounded" value="ico-check-lg">Check large</option>
+                                            <option class="medium" value="ico-check-md">Check medium</option>
+                                            <option class="large rounded" value="ico-download-lg">Download large</option>
+                                            <option class="medium" value="ico-download-md">Download medium</option>
+                                            <option class="large medium rounded" value="ico-external-lg">External Link</option>
+                                            <option class="large rounded" value="ico-plus-lg">Plus large</option>
+                                            <option class="medium" value="ico-plus-md">Plus medium</option>
+                                            <option class="large rounded" value="ico-triangle-right-lg">Triangle large</option>
+                                            <option class="medium" value="ico-triangle-right-md">Triangle medium</option>
+                                            <option class="small" value="ico-triangle-right-sm">Triangle small</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="options-row">
+                                    <label for="tool-sample-input" class="for-text">Button text:</label>
+                                    <input name="tool-sample-input" class="text" id="tool-sample-input" value="Try It Now">
+                                </div>
+                                <div id="output-wrap">
+
+                                </div>
+                                <span id="markup-wrap"> <span class="markup-title floatL">Markup:</span>  <span class="floatR"><a href="#" class="reset">reset</a></span> </span>
+                                <div class="options-row">
+                                    <div id="tool-output-markup"></div>
+                                </div>
+                                <div class="notes">
+                                    <h3 class="flush-top">Notes</h3>
+                                    <ul class="has-ico standard">
+                                        <li><i class="ico ico-bullet"></i>Some options will be disabled depending on the selected button type</li>  
+                                        <li><i class="ico ico-bullet"></i>The icon will reset if the button type is changed above</li>
+                                        <li><i class="ico ico-bullet"></i>Rounded buttons <strong>must always</strong> have an icon</li>
+                                        <li><i class="ico ico-bullet"></i>There is no light grey variant for large or rounded buttons</li>      
+                                    </ul>
+                                </div>
+                            </div>                
+                        </div>
+
+                        <h2 class="section-title">Standard Button</h2>
+                        <div class="section-wrap usage" id="standard-button">
+                            <ul>
+                                <li><a class="btn">Margin &amp; Leverage FAQ<i class="ico ico-btn ico-arrow-right-md"></i></a></li>
+                                <li><a class="btn btn-blue">Margin &amp; Leverage FAQ<i class="ico ico-btn ico-arrow-right-md"></i></a></li>
+                                <li><a class="btn btn-yellow">Margin &amp; Leverage FAQ<i class="ico ico-btn ico-arrow-right-md"></i></a></li>
+                                <li><a class="btn btn-light-grey">Margin &amp; Leverage FAQ<i class="ico ico-btn ico-arrow-right-md"></i></a></li>
+                            </ul>
+                        </div>
+
+                        <h2 class="section-title">Small Button</h2>
+                        <div class="section-wrap usage" id="small-button">
+                            <ul>
+                                <li><a class="btn btn-small">Try It Now<i class="ico ico-btn ico-arrow-right-sm"></i></a></li>
+                                <li><a class="btn btn-small btn-blue">Try It Now<i class="ico ico-btn ico-arrow-right-sm"></i></a></li>
+                                <li><a class="btn btn-small btn-yellow">Try It Now<i class="ico ico-btn ico-arrow-right-sm"></i></a></li>
+                                <li><a class="btn btn-small btn-light-grey">Try It Now<i class="ico ico-btn ico-arrow-right-sm"></i></a></li>
+                            </ul>
+                        </div>
+
+                        <h2 class="section-title">Large Button</h2>
+                        <div class="section-wrap usage" id="large-button">
+
+                            <ul>
+                                <li><a class="btn btn-large">Download Desktop Platform<i class="ico ico-btn ico-download-lg"></i></a></li>
+                                <li><a class="btn btn-large btn-blue">Download Desktop Platform<i class="ico ico-btn ico-download-lg"></i></a></li>
+                                <li><a class="btn btn-large btn-yellow">Download Desktop Platform<i class="ico ico-btn ico-download-lg"></i></a></li>
+                                <li><span class="txt-light-grey"><strong>!</strong></span> There is no light grey variant for this class</li>
+                            </ul>
+                        </div>
+
+                        <h2 class="section-title">Rounded Button</h2>
+                        <div class="section-wrap usage" id="rounded-button">
+                            <ul>
+                                <li><a class="btn btn-round"><b></b>Sign Up for the Seminar<i class="ico ico-btn ico-arrow-right-lg"></i></a></li>
+                                <li><a class="btn btn-round btn-blue"><b></b>Sign Up for the Seminar<i class="ico ico-btn ico-arrow-right-lg"></i></a></li>
+                                <li><a class="btn btn-round btn-yellow"><b></b>Sign Up for the Seminar<i class="ico ico-btn ico-arrow-right-lg"></i></a></li>
+                                <li><span class="txt-light-grey"><strong>!</strong></span> There is no light grey variant for this class</li>
+                            </ul>
+                        </div>
+
+                        <h2 class="section-title">Button Resizing</h2>
+                        <div class="section-wrap usage" id="button-resizing">
+                            <h3>Fill</h3>
+                            <ul style="width:50%;">
+                                <li><a class="btn btn-fill">Margin &amp; Leverage FAQ<i class="ico ico-btn ico-check-md"></i></a></li>
+                                <li><a class="btn btn-fill btn-small">Try It Now<i class="ico ico-btn ico-arrow-down-sm"></i></a></li>
+                                <li><a class="btn btn-fill btn-large">Download Desktop Platform<i class="ico ico-btn ico-download-lg"></i></a></li>
+                                <li><a class="btn btn-fill btn-round"><b></b>Sign Up for FXCM Seminar<i class="ico ico-btn ico-arrow-right-circled-lg"></i></a></li>
+                            </ul>
+                            <h3>Half Fill</h3>
+                            <ul>
+                                <li><a class="btn btn-half-fill">Margin &amp; Leverage FAQ<i class="ico ico-btn ico-check-md"></i></a></li>
+                                <li><a class="btn btn-half-fill btn-small">Try It Now<i class="ico ico-btn ico-arrow-down-sm"></i></a></li>
+                                <li><a class="btn btn-half-fill btn-large">Download Desktop Platform<i class="ico ico-btn ico-download-lg"></i></a></li>
+                                <li><a class="btn btn-half-fill btn-round"><b></b>Sign Up for FXCM Seminar<i class="ico ico-btn ico-arrow-right-circled-lg"></i></a></li>
+                            </ul>
+                            <h3>Quarter Fill</h3>
+                            <ul>
+                                <li><a class="btn btn-quarter-fill">Learn More<i class="ico ico-btn ico-arrow-right-md"></i></a></li>
+                                <li><a class="btn btn-quarter-fill btn-small">Learn More<i class="ico ico-btn ico-arrow-right-sm"></i></a></li>
+                                <li><a class="btn btn-quarter-fill btn-large">Learn<i class="ico ico-btn ico-arrow-right-lg"></i></a></li>
+                                <li><a class="btn btn-quarter-fill btn-round"><b></b>Learn More<i class="ico ico-btn ico-arrow-right-lg"></i></a></li>
+                            </ul>
+                            <h3>Inline</h3>
+                            <ul>
+                                <li><a class="btn btn-inline ">Product Features<i class="ico ico-btn ico-arrow-right-md"></i></a></li>
+                                <li><a class="btn btn-inline btn-small">Learn More<i class="ico ico-btn ico-triangle-right-sm"></i></a></li>
+                                <li><a class="btn btn-inline btn-large">Launch Web Platform<i class="ico ico-btn ico-external-lg"></i></a></li>
+                                <li><a class="btn btn-inline btn-round"><b></b>Open a Live Account<i class="ico ico-btn ico-check-lg"></i></a></li>
+                            </ul>
+                        </div>
+
+                        <h2></h2>
+                        <h2 class="section-title">Special Button Types</h2>
+                        <div class="section-wrap usage" id="special-button-types">
+                            <h3>Submit Button</h3>
+                            <ul>
+                                <li><input type="submit" class="btn submit" value="Submit"></li>
+                                <li><input type="submit" class="btn submit submit-blue" value="Submit"></li>
+                                <li><input type="submit" class="btn submit submit-dark-grey" value="Submit"></li>
+                                <li><span class="txt-light-grey"><strong>!</strong></span> There is no light grey variant for this class</li>
+                            </ul>
+
+                            <h3>Video &amp; Close Button</h3>
+                            <ul>
+                                <li><a><span class="btn btn-small btn-inline btn-blue">Video<i class="ico ico-btn ico-triangle-right-sm"></i></span>Trading from charts (1:34)</a></li>
+                                <li><a class="btn-collapse" href="#">Close<i class="ico ico-complex ico-close"></i></a></li>
+                            </ul>
+                        </div>
+                    </article>
+
+                </div>
+            </section>
+        </div>
+    </div>
+
+</body>

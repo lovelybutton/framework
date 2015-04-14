@@ -1,0 +1,124 @@
+<!doctype html>
+
+<head>
+<meta charset="utf-8">
+<title>Proto: Backgrounds</title>
+
+	
+	<script src="assets/script/lib.js" type="text/javascript"></script>
+	<script src="assets/script/script.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="assets/css/global.css">
+	
+
+	<!-- base proto stylesheets and script files -->
+	<script src="assets/script/proto-script.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="assets/css/proto-style.css">
+
+</head>
+<body>
+<div id="global_container"> 
+    <nav class="pro-nav">
+        <div class="pro-home"><a href="../proto/">Proto Home</a></div>
+        <div class="pro-nav-expandable expandableSet">
+            <dl class="pro-menu">
+                <dt class="pro-menu-title"><i class="ico ico-menu"></i><div class="title-text">PROTO MENU</div></dt>
+                <dd class="pro-menu-body clearfix">
+                    <div class="pro-nav-cat">Modules</div>
+                    <div class="pro-nav-cat-wrap">
+                        <ul class="pro-nav-list clearfix">
+                            <li class="pro-nav-background current"><a href="background.html">Background</a></li>
+                            <li class="pro-nav-border"><a href="border.html">Border</a></li>
+                            <li class="pro-nav-button"><a href="button.html">Button</a></li>
+                            <li class="pro-nav-expandable-set"><a href="expandable-set.html">Expandable Set</a></li>
+                            <li class="pro-nav-flag"><a href="flag.html">Flag</a></li>
+                            <li class="pro-nav-form"><a href="form.html">Form</a></li>
+                            <li class="pro-nav-grid"><a href="grid.html">Grid</a></li>
+                            </ul>
+                        </div>
+                        <div class="pro-nav-cat-wrap">
+                            <ul class="pro-nav-list clearfix">
+                            <li class="pro-nav-icon"><a href="icon.html">Icon</a></li>
+                            <li class="pro-nav-modal"><a href="modal.html">Modal</a></li>
+                            <li class="pro-nav-tab"><a href="tab.html">Tab</a></li>
+                            <li class="pro-nav-table"><a href="table.html">Table</a></li>
+                            <li class="pro-nav-thumbnail"><a href="thumbnail.html">Thumbnail</a></li>
+                            <li class="pro-nav-typography"><a href="typography.html">Typography</a></li>
+                            
+                        </ul>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+    </nav>
+
+	<!-- MAIN CONTENT -->
+	<div class="rowGroup mainContent contains-SC">
+		<section class="row pattern-CS">
+			<div class="row-inner">
+				<article class="C">
+					<h1>Backgrounds</h1>
+                    <h2>Creating standalone emphasized content</h2>
+                    
+                    <h3 class="txt-no-caps">.bg .bg-round-shadow</h3>
+                    <p>To create a background element a div with the class <strong class="txt-blue">.bg</strong> is required. Within the background element a div with the class <strong class="txt-blue">.bg-inner</strong> is used to store the content. Then an element of <strong class="txt-blue">.bg-shoe</strong> with a child of <strong class="txt-blue">.bg-sock</strong> is used to cap off the bottom of a background. Background elements will horizontally fill the width of their parent.</p>
+                    <p>Currently there is only one style for background, described as "Rounded corners with shadow." To achieve this style a class of <strong class="txt-blue">.bg-round-shadow</strong> is added to the background element.</p>
+                    <div class="padding-bottom">
+                        <div class="bg bg-round-shadow">
+                            <div class="bg-inner clearfix">
+                                <h3 class="no-margin-top txt-blue txt-18 txt-no-caps margin-bottom">Background Element with Rounded Corners</h3>
+                                <p class="no-margin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ornare ante ac eros venenatis dignissim. Maecenas sed tincidunt eros. Curabitur viverra lacinia gravida. Sed ac erat nec ligula faucibus ornare. Nunc vitae vehicula justo.</p>
+                            </div>
+                            <div class="bg-shoe">
+                                <div class="bg-sock"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="txt-no-caps">.bg-align</h3>
+                    <p>Columns can have their bottoms justified to each other by wrapping them in a parent div with a class of <strong class="txt-blue">.bg-align</strong>. A javascript function will calculate the largest height of all columns within that parent, and then set the height for all columns to that height.</p>
+                    <div class="contains-2 has-gutter gutter-md bg-align padding-bottom">
+                        <div class="bg bg-round-shadow unit"> 
+                            <div class="bg-inner clearfix">
+                                <h3 class="no-margin-top margin-bottom">This is a naturally tall column due to inner content</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id neque sit amet quam ullamcorper euismod. Praesent turpis mauris, tempor non iaculis sed, lacinia et odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed at scelerisque leo. Curabitur mollis consequat volutpat.</p>
+                            </div>
+                            <div class="bg-shoe">
+                                <div class="bg-sock"></div>
+                            </div>
+                        </div>
+                        <div class="bg bg-round-shadow unit"> 
+                            <div class="bg-inner clearfix">
+                                <h3 class="no-margin-top margin-bottom">This column matches the height of its sibling</h3>
+                                <p class="no-margin-bottom">Praesent ac leo vitae mi ultricies euismod. Praesent consequat tortor sed mi vehicula mollis. Cras a dapibus augue.</p>
+                            </div>
+                            <div class="bg-shoe">
+                                <div class="bg-sock"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="txt-no-caps">Adding paperclip</h3>
+                    <p>The paperclip is a separate icon element that is inserted as a child of .bg. It has a class of <strong class="txt-blue">.ico-paperclip</strong>.</p>
+                    <div class="padding-bottom">
+                        <div class="bg bg-round-shadow">
+                        	<i class="ico ico-paperclip"></i>
+                            <div class="bg-inner clearfix">
+                                <h3 class="no-margin-top txt-blue txt-18 txt-no-caps margin-bottom">Rounded corners and a paperclip</h3>
+                                <p class="no-margin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ornare ante ac eros venenatis dignissim. Maecenas sed tincidunt eros. Curabitur viverra lacinia gravida. Sed ac erat nec ligula faucibus ornare. Nunc vitae vehicula justo.</p>
+                            </div>
+                            <div class="bg-shoe">
+                                <div class="bg-sock"></div>
+                            </div>
+                        </div>
+                    </div>
+				</article>
+				<aside class="S">
+                	
+				</aside>
+			</div>
+		</section>
+	</div>
+	<!-- MAIN CONTENT end --> 
+</div>
+</body>
+</html>

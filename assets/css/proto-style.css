@@ -1,0 +1,69 @@
+.mainContent .row:first-child {padding-top:80px;}
+
+.pro-nav {position:fixed;top:0;height:31px;width:100%;z-index:10;background:#f0f0f0;border-bottom:1px solid #ccc;box-shadow:0px -3px 7px rgba(0, 0, 0, 0.75);}
+.pro-nav-expandable {position:absolute;top:0;right:30px;text-align:left;}
+.pro-home a {display:inline-block;padding:0 14px;line-height:30px;font:13px/30px 'Opensans-bold';text-transform: uppercase;text-decoration: none;color:#283545;}
+.pro-home a:hover {color:#f0f0f0;background:#283545;}
+.pro-menu-title {height:31px;font:13px/28px 'Opensans-bold';border-left:1px solid #aaa;border-right:1px solid #aaa;}
+.pro-menu-title .title-text {display:none;}
+.pro-menu-title .ico-menu {width:34px;height:30px;float:right;margin-right:1px;background:url(../img/chrome/ico-menu-dark.gif) 0 -30px no-repeat;}
+.pro-menu-title.open .ico-menu {background-position: 0 0;}
+.pro-menu-title.open {color:#f0f0f0;background:#283545;border-color:#ccc;}
+.pro-menu-title.open .title-text {display:block;padding-left:1em;text-align:left;}
+.pro-menu-body {position:relative;padding:30px 0 30px 30px;}
+.pro-menu-body .closeThis {left:1px;right:1px;bottom:1px;height:20px;text-align:center;padding:0 1em;font:13px/20px 'Opensans-bold';text-decoration: none;color:#f8f8f8;text-transform:uppercase;border-top:1px solid #ddd;background-color: #0059b3}
+.pro-menu-body .closeThis:hover {background:#000;}
+.pro-menu-body .closeThis:after {content: "Close menu";display:block;}
+.pro-menu-body .closeThis .ico {display:none;}
+.pro-menu-body.open {background:white;border:1px solid #bbb;border-top:none;box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);}
+.pro-nav-cat-wrap {float:left;width:330px;padding-right:40px;}
+.pro-nav-cat {font-weight:bold;font:16px 'Opensans-semibold';}
+.pro-nav-list {margin:1.5em 0 2em;font-size:14px;}
+.pro-nav-list li {position:relative;padding:6px 0 6px .65em; border-bottom:1px dotted #ccc;}
+.pro-nav-list li:first-child {border-top:1px dotted #ccc;}
+.pro-nav-list .pro-nav-title {font-size:18px;padding:0;color:#000;}
+.pro-nav-list a {text-transform:lowercase;}
+.pro-nav-list li:hover {background:#fad749;}
+.pro-nav-list .current{background-color:#eee;}
+.pro-nav-list .current:before {display:none;}
+
+
+h2.section-title {font-family:'OpenSans-regular';font-size:32px;margin:0;}
+h3.title {margin:0 0 .5em;font-size:18px;font-family:'OpenSans-regular';text-transform:none}
+h3.title:first-child {margin-top:0;}
+h4.subtitle {margin:0;font-size:14px;font-family:'OpenSans-semibold';text-transform:none}
+
+.toTop {text-align: right;}
+.toTop a {font-size:11px;}
+
+.toc-wrap {margin-bottom:21px;padding:10px 0;}
+.toc-title{margin:0;font-family:'OpenSans-semibold';font-size:13px;text-transform: uppercase; }
+.toc {margin-top:.75em!important;}
+.toc li {margin:0 .9em .5em 0;} 
+.toc a {display:block;padding:4px 12px;font-family:'Opensans-semibold';font-size:14px;text-decoration:none;border-radius:3px;color:#eee;background-color:#0059b3;box-shadow:inset 1px 1px 1px #004387;}
+.toc a:hover {box-shadow:inset -1px -1px 2px #000;border-radius:3px;background-color:#283545;}
+.section-wrap.usage {margin:10px 0 20px;border:1px solid #ddd;padding:20px;}
+
+
+.codeBlock {margin-bottom:21px;padding:1px 14px;border-radius:5px; background-color:#f2f2f2;}
+.codeBlock .emph {padding-left:.25em;padding-right:.25em;background-color:#fff;border-radius:6px;}
+.codeBlock .txt-light-gray, 
+.codeBlock .txt-light-gray .attribute, 
+.codeBlock .txt-light-gray .value,
+.codeBlock .txt-light-gray .title,
+.codeBlock .txt-light-gray .tag {color:#8c9bac !important;}
+.sampleBlock {margin-bottom:21px;padding:14px;border-radius:5px; border:1px dotted #333; /*#5f7c9f*/}
+
+code {display:inline-block;margin-top:.2em;margin-bottom:.2em;margin-right:.2em;padding:.2em .28em .2em .25em;font:1em 'Droid Sans Mono', 'Courier New', Courier, monospace; white-space:nowrap;background: #f6f6f6;border:1px solid #efefef;border-radius:6px; }
+code:hover {color:#111; background-color:#e1edf8;}
+code em {color:#006797;font-style:normal;}
+code.emph {color: #fff; background-color: #20a7f5; border-color: #1098e7}
+code strong {color:#0071a5;font-style:normal;font-weight:normal;}
+a:hover code { color:#000; background-color:#FFC; }
+h4 code {text-transform: none;}
+
+.gotolink {font-weight:bold;font-size:13px;}
+.gotolink a {padding:4px 6px;text-decoration:none}
+.gotolink .selected {background-color: #ddd;text-decoration: none;}
+.gotolink .proto-tool {border:1px dotted #0059b3;}
+hr {margin:36px 0;padding:0;height:1px;font-size:0px; line-height:0;border-top:1px solid #ddd;}

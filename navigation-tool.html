@@ -1,0 +1,324 @@
+<!doctype html>
+
+<head>
+<meta charset="utf-8">
+<title>FXCM3 - Nav3 tabs tool</title>
+
+<script src="assets/script/lib.js" type="text/javascript"></script>
+<script src="assets/script/script.js" type="text/javascript"></script>
+<link rel="stylesheet" href="assets/css/global.css">
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+	//$(".nav3-tabs").tabs(".nav3-content > div").history();
+});
+
+</script>
+<link rel="stylesheet" href="assets/css/global.css">
+<style type="text/css">
+	body { margin:0; padding:20px; background:#fff; }
+	#global_container { width:980px; }
+	.title { display:block; font:17px/39px 'Opensans-semibold'; color:#fff; background:#0c51a3; padding:0 10px; border-bottom:3px solid #202d3d; }
+	.options-row { background:#f0f3f5; border-bottom:1px solid #bfc4c8; padding:10px; overflow:hidden; }
+	.inputField {padding-bottom:4px;}
+	.markup{border-top:1px solid #bfc4c8; }
+	.box { float:left; margin-right:20px; position:relative; overflow:hidden; }
+	.box.checkbox { padding-top:20px; width:80px; }
+	label { display:block; font:normal 11px/17px Verdana, Geneva, sans-serif; color:#333; }
+	label.for-checkbox { margin:1px 0 0 22px; }
+	select { width:150px; }
+	input.checkbox { float:left; }
+	input.text {width:50%; font:12px Verdana, sans-serif;  }
+	.text-input {padding-bottom:10px;}
+	label.for-text { font:normal 11px/23px Verdana, sans-serif; padding:0 10px 0 0; float:left; }
+	#output-wrap { padding:40px 0; }
+	#tool-output-markup {padding:10px 0 0 20px;font-size:11px; } 
+	#tool-output-markup .tabs {padding-left:30px;}
+	#tool-button-icon { width:150px; }
+	u { text-decoration:none; padding:3px 6px;border-radius:4px;background-color:#fff;border:1px solid #D4E0E8;/*line-height:1.75em;*/}
+	.row-title {margin-bottom:10px;font-size:11px;font-weight:bold;}
+	.output {padding-top:30px;}
+	.pattern-CS {width:680px;}
+	.pattern-C {width:980px;}
+	#markup-wrap{font:normal 11px/29px Verdana, sans-serif; display:block; color:#fff; overflow:hidden; background:#8c9bac;}
+	#markup-wrap span{display:block; padding:0 10px;}
+	#markup-wrap a{color:#283545;}
+	.markup-title{background:#283545;}
+
+</style>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	var tabs = {
+		parent: $('#output-wrap'),
+		baseHTML: {
+			openTag: '<li class="unit">',
+			closeTag: '</li>'		
+		},
+		innerHTML: [],
+		classes: []
+	}
+	
+	var settings = {
+		numberOfTabs: 4,
+		variant: '',
+		parentWidth: 'pattern-C'
+	}
+	
+	function setInnerHTML(index){
+		var text = $('input[name="tool-sample-input"]').eq(index).val();
+		
+		tabs.innerHTML[index] = text === undefined? 'Default value' : text;
+		return tabs.innerHTML[index];
+	}
+
+	function getInnerHTML(index) {
+		return tabs.innerHTML[index];
+	}
+	
+	function setClasses() {
+		var classes = ['nav3', 'nav3-tabs', 'module'];
+		
+		classes.push(settings.variant);
+		classes.push('contains-' + settings.numberOfTabs);
+		tabs.classes = classes;
+		
+		return tabs.classes;
+	}
+	
+	function getClasses(){
+		return 	tabs.classes;
+	}
+
+	function updateSettings() {
+		// collect current settings
+		$('#tool-wrap select').each(function(index){
+			
+			var cat = $(this).attr('id');
+			var val = $(this).children('option:selected').val();
+			settings[cat] = val;
+		});
+		
+		setClasses();
+		return settings;
+	}
+
+	function generateInputFields() {
+		var fields = $('.inputFieldContainer').find('.inputField');
+		var visible = fields.filter(':visible');
+		
+		if (visible.length > settings.numberOfTabs) {
+			for (var i = fields.length; i > settings.numberOfTabs; i--){
+				fields.eq(i - 1).hide();
+			}
+		} 
+		else if (visible.length < settings.numberOfTabs) {
+			for (var i = 0; i < settings.numberOfTabs; i++){
+				fields.eq(i).show();
+			}
+		}
+	}
+	
+	function createListItems(){
+		// Generate the list items
+		var generatedTabs = [];
+		for (var i = 0; i < settings.numberOfTabs; i++){
+			if (i === 0) {
+				generatedTabs[i] = tabs.baseHTML.openTag + '<a class="current" href="#">' + setInnerHTML(i) + '</a>' +  tabs.baseHTML.closeTag;
+			}
+			else {
+				generatedTabs[i] = tabs.baseHTML.openTag + '<a href="#">' + setInnerHTML(i) + '</a>' +  tabs.baseHTML.closeTag;
+			}
+		}	
+		return generatedTabs;
+	}
+	
+	function setParentWidth() {
+		$('#output-wrap').attr('class', settings.parentWidth);
+		var selector = $('#numberOfTabs');
+		var children = selector.children('option');
+		
+		if(settings.parentWidth === 'pattern-CS') {
+			// Disable options 5 and 6 if narrower parent width is selected
+			children.eq(children.length - 1).attr('disabled', 'disabled');
+			children.eq(children.length - 2).attr('disabled', 'disabled');
+			
+			// Automatically select option 4 if 5 or 6 were already selected
+			if (selector.attr('selectedIndex') === children.length - 1 || selector.attr('selectedIndex') === children.length - 2){
+				selector.attr('selectedIndex', children.length - 3);		
+				generateTabs();		
+			}
+		}
+		else {
+			children.eq(children.length - 1).attr('disabled', '');
+			children.eq(children.length - 2).attr('disabled', '');
+		}
+		
+		return settings.parentWidth;	
+	}
+	
+	function outputMarkup() {
+		var output = $('#tool-output-markup');
+		
+		output.find('.parentClasses').html(function(){
+			var classes = getClasses();
+			var wrappedClasses = [];
+			for (i = 0; i < classes.length; i++) {
+				wrappedClasses[i] = '<u>' + classes[i] + '</u>';	
+			}
+			return wrappedClasses.join(' ');
+		});
+		
+		output.find('ul.tabs').empty().append(function(){
+		 	var listItems = createListItems();
+			var wrappedListItems = [];
+			for (i = 0; i < listItems.length; i++) {
+				listItems[i] = listItems[i].replace(/</g,'&lt;').replace(/>/g,'&gt;');
+				wrappedListItems[i] = '<li>' + listItems[i] + '</li>';	
+			}
+			return wrappedListItems.join(' ');
+		});
+	}
+	
+	function generateTabs() {
+		updateSettings();
+		
+		// Replace list items
+		tabs.parent.find('ul').remove();
+		var newSet = $(document.createElement('ul')).append(createListItems().join('')).attr('class', getClasses().join(' '));
+		tabs.parent.prepend(newSet);
+		
+		$(".nav3-tabs").tabs(".nav3-content > div");
+		
+		generateInputFields(); 
+		outputMarkup();
+	}
+	
+	// Set tabs on page load
+	generateTabs();
+	
+	$('#tool-wrap select').change(function(){
+		generateTabs();
+		
+		if ($(this).attr('id') === 'parentWidth'){
+			setParentWidth();
+		}
+	});
+	
+	$('input[name="tool-sample-input"]').keyup(function(){
+		generateTabs();
+	});
+});
+</script>
+</head>
+<body>
+<div id="global_container">
+	<div id="tool-wrap"> <span class="title">FXCM III Nav3 tabs generator</span>
+		<div class="options-row">
+			<div class="row-title">Select options:</div>
+			<div class="box">
+				<label for="numberOfTabs">Number of Tabs</label>
+				<select name="numberOfTabs" id="numberOfTabs">
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option selected="selected" value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+				</select>
+			</div>
+			<div class="box">
+				<label for="variant">Line length:</label>
+				<select name="variant" id="variant">
+					<option selected="selected" value="">default (one line)</option>
+					<option value="nav3-tabs-tall">tall (two lines)</option>
+				</select>
+			</div>
+			<div class="box">
+				<label for="parentWidth">Parent width:</label>
+				<select name="parentWidth" id="parentWidth">
+					<option selected="selected" value="pattern-C">980 [C]</option>
+					<option value="pattern-CS">680 [CS]</option>
+				</select>
+			</div>
+		</div>
+		<div class="options-row inputFieldContainer">
+			<div class="row-title">Enter new text:</div>
+			<div class="inputField clearfix">
+				<label class="for-text">Tab <span class="num">1</span></label>
+				<input type="text" name="tool-sample-input" class="text" value="Order Types" />
+			</div>
+			<div class="inputField clearfix">
+				<label class="for-text">Tab <span class="num">2</span></label>
+				<input type="text" name="tool-sample-input" class="text" value="Trading Modes" />
+			</div>
+			<div class="inputField clearfix">
+				<label class="for-text">Tab <span class="num">3</span></label>
+				<input type="text" name="tool-sample-input" class="text" value="Charts and News" />
+			</div>
+			<div class="inputField clearfix">
+				<label class="for-text">Tab <span class="num">4</span></label>
+				<input type="text" name="tool-sample-input" class="text" value="Data and Execution" />
+			</div>
+			<div class="inputField clearfix">
+				<label class="for-text">Tab <span class="num">5</span></label>
+				<input type="text" name="tool-sample-input" class="text" value="Expert Advisors" />
+			</div>
+			<div class="inputField clearfix">
+				<label class="for-text">Tab <span class="num">6</span></label>
+				<input type="text" name="tool-sample-input" class="text" value="Free MT4 VPS" />
+			</div>
+		</div>
+		<div id="output-wrap">
+			<ul class="nav3 nav3-tabs contains-4 module ">
+				<li class="unit"><a href="#">Trading Modes</a></li>
+				<li class="unit"><a href="#">Order Types</a></li>
+				<li class="unit"><a href="#">Data and Execution</a></li>
+				<li class="unit"><a href="#">Another link</a></li>
+			</ul>	
+			
+			
+			<div class="nav3-content">
+				<div>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ut leo nec dui pretium viverra. Donec consequat mattis mauris, a molestie massa auctor eleifend. Fusce vitae arcu eget nisl aliquet congue. Suspendisse potenti. Praesent laoreet tempor neque vel placerat. Aliquam eget risus sapien.</p> 
+				</div>
+				<div>
+					<p>Vivamus pulvinar malesuada justo, eu placerat dolor facilisis ac. Integer viverra neque eu ante commodo eget viverra lectus tincidunt. Phasellus vel sodales turpis. Aliquam ut lacus et sem ultricies eleifend. Nunc metus lorem, interdum vel pulvinar ut, sodales pretium mauris.</p>
+				</div>
+				<div>
+					<p>Mauris consequat, leo id consequat faucibus, urna urna iaculis mi, a pellentesque nulla purus sed odio. Duis adipiscing velit sed lorem condimentum adipiscing. Vivamus risus dui, adipiscing ac condimentum ut, euismod dignissim arcu. Sed urna lacus, semper nec tempus eu, tristique sit amet libero.</p>
+				</div>
+				<div>
+					<p>Suspendisse mattis, justo sollicitudin suscipit fermentum, erat nibh consectetur ligula, auctor auctor nulla lorem ac nisl. In mauris quam, tincidunt ut varius et, rutrum non erat. Proin consectetur, quam non pellentesque pharetra, libero nunc rhoncus quam, non gravida dolor ipsum id neque. Nulla dignissim tortor nec sem condimentum pretium. Nunc suscipit tincidunt vestibulum.</p>
+				</div>
+				<div>
+					<p>In ac sodales purus. Suspendisse eu elit metus. In dignissim varius augue vel fringilla. Morbi ultricies dapibus pretium.</p>
+				</div>
+				<div>
+					<p>Nunc scelerisque sollicitudin ultricies. Maecenas rhoncus, sem vel pellentesque sagittis, eros massa blandit velit, id tempus orci est id purus.</p>
+				</div>																								
+			</div>
+			
+			
+		</div>
+		<span id="markup-wrap"> <span class="markup-title floatL">Markup:</span></span>
+		<div class="options-row markup">
+			<div id="tool-output-markup">
+				<div class="open">&lt;ul class="<span class="parentClasses">parent classes</span>"&gt;</div>
+				<ul class="tabs">
+				</ul>
+				<div class="close">&lt;/ul&gt;</div>
+				<div>
+					&lt;div class="<u>nav3-content</u>"&gt;<br />
+					<span style="padding-left:30px;">Tab content goes here</span><br />
+					&lt;/div&gt;
+				</div>
+			
+			</div>
+		</div>
+	</div>
+	
+	<!-- MAIN CONTENT end --> 
+</div>
+</body>
+</html>

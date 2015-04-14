@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>PROTO: Grids</title>
+
+	
+	<script src="assets/script/lib.js" type="text/javascript"></script>
+	<script src="assets/script/script.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="assets/css/global.css">
+
+	<!-- base proto stylesheets and script files -->
+	<script src="assets/script/proto-script.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="assets/css/proto-style.css">
+
+	<!-- highlight.js -->
+	<script src="assets/script/highlight.js/highlight.pack.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="assets/css/highlight.js/default.css">
+	<link rel="stylesheet" href="assets/css/highlight.js/googlecode.css">
+
+	<style type="text/css">
+	#mc .row-inner{width:1038px;}
+	.sizeC {width:980px;}
+	.sizeCS {width:680px;}
+
+	.example {margin:10px 0;}
+	.example .unit {/*background-color:#999; */padding:.75em .5em; border:1px solid #20a7f5; border-left:none;}
+	.example .unit:first-child {border-left:1px solid #20a7f5;}
+	.example.has-gutter .unit{border-left:1px solid #20a7f5;}
+	.example .unit.combo { background:#eee; }
+	.example .unit.combo code {border-color:#ddd;}
+	.unit .unit {background-color:#eee;}
+	</style>
+
+</head>
+
+<body>
+	<div id="global_container">
+		<nav class="pro-nav">
+			<div class="pro-home"><a href="../proto/">Proto Home</a></div>
+			<div class="pro-nav-expandable expandableSet">
+				<dl class="pro-menu">
+					<dt class="pro-menu-title"><i class="ico ico-menu"></i><div class="title-text">PROTO MENU</div></dt>
+					<dd class="pro-menu-body clearfix">
+							<div class="pro-nav-cat">Modules</div>
+						<div class="pro-nav-cat-wrap">
+							<ul class="pro-nav-list clearfix">
+								<li class="pro-nav-background"><a href="background.html">Background</a></li>
+								<li class="pro-nav-border"><a href="border.html">Border</a></li>
+								<li class="pro-nav-button"><a href="button.html">Button</a></li>
+								<li class="pro-nav-expandable-set"><a href="expandable-set.html">Expandable Set</a></li>
+								<li class="pro-nav-flag"><a href="flag.html">Flag</a></li>
+								<li class="pro-nav-form"><a href="form.html">Form</a></li>
+								<li class="pro-nav-grid current"><a href="grid.html">Grid</a></li>
+								</ul>
+						</div>
+						<div class="pro-nav-cat-wrap">
+							<ul class="pro-nav-list clearfix">
+								<li class="pro-nav-icon"><a href="icon.html">Icon</a></li>
+								<li class="pro-nav-modal"><a href="modal.html">Modal</a></li>
+								<li class="pro-nav-tab"><a href="tab.html">Tab</a></li>
+								<li class="pro-nav-table"><a href="table.html">Table</a></li>
+								<li class="pro-nav-thumbnail"><a href="thumbnail.html">Thumbnail</a></li>
+								<li class="pro-nav-typography"><a href="typography.html">Typography</a></li>
+							
+								
+							</ul>
+						</div>
+					</dd>
+				</dl>
+			</div>
+		</nav>
+
+		<div class="rowGroup mainContent" id="mc">
+
+			<section class="row pattern-C flush-bottom">
+				<div class="row-inner">
+					<article class="C">
+						<h1>Grids</h1>
+
+						<div class="has-toc" id="module-template">
+							<div class="toc-wrap usage">
+								<p class="toc-title">Table of Contents:</p>
+								<ul class="toc list-inline-block"></ul>
+							</div>
+
+							<p class="lead-in">The contains grids are a way to easily create multi-column layouts without having to use floats or write any custom css.  Grids can be created with two to six column distribution and will automatically re-adjust and re-distribute their width according to their containing parent element.</p>
+<!-- /////////////////////////////////////
+	BEGIN basic usage	
+	///////////////////////////////////// -->
+	<h2 class="section-title">Overview</h2>
+	<div class="section-wrap usage" id="Overview">
+		<p>At its core, the simplest way to create a contains grid is to code a div with the class of <code>.contains-<em>#</em></code>. The <code><em>#</em></code> should be the amount of equal columns you need, from two to six. Within that div, add the correct number of <code>div.unit</code>s, one for each column:</p>
+
+		<h3 class="title">Coding the basic grid:</h3>
+		<p>This is a simple two-column grid:</p>
+		<!-- start codeBlock -->
+		<div class="codeBlock">
+<pre>&lt;div class="contains-2"&gt;
+	&lt;div class="unit"&gt;&lt;/div&gt;
+	&lt;div class="unit"&gt;&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+		</div>
+		<!-- end codeBlock -->
+
+		<hr>
+
+		<h3 class="title">Using other HTML elements (other than <code>div</code>) to build your grid:</h3>
+		<p class="margin-top">You can use any block-level elements for the contains grids parent or unit. Here's an example using lists as the parent:</p>
+		<!-- start codeBlock -->
+		<div class="codeBlock">
+<pre>&lt;ul class="contains-2 standard"&gt;
+	&lt;li class="unit"&gt;&lt;/li&gt;
+	&lt;li class="unit"&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+		</div>
+		<!-- end codeBlock -->
+		<!-- start sampleBlock -->
+		<div class="sampleBlock margin-top">
+			<p class="no-margin-bottom">This list has two list items, each of which takes up 50% of its parent list. No floats!</p>
+			<ul class="contains-2 standard has-ico">
+				<li class="unit" style="background: #eee;"><i class="ico ico-bullet"></i>List item</li>
+				<li class="unit" style="background: #ddd;"><i class="ico ico-bullet"></i>List item</li>
+			</ul>
+		</div>
+		<!-- end sampleBlock -->
+		<p class="margin-top">And here we're using unordered lists as the units:</p>
+		<!-- start codeBlock -->
+		<div class="codeBlock">
+<pre>&lt;div class="contains-2"&gt;
+	&lt;ul class="unit standard"&gt;
+		&lt;li&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;/li&gt;
+	&lt;/ul&gt;
+	&lt;ul class="unit standard"&gt;
+		&lt;li&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;/li&gt;
+	&lt;/ul&gt;
+&lt;/div&gt;
+</pre>
+		</div>
+		<!-- end codeBlock -->
+		<!-- start sampleBlock -->
+		<div class="sampleBlock margin-top">
+			<p class="no-margin-bottom">The lists below each take up 50% up their parent container. No floats here either...</p>
+			<div class="contains-2">
+				<ul class="unit standard has-ico" style="background: #eee;">
+					<li><i class="ico ico-bullet"></i>List item</li>
+					<li><i class="ico ico-bullet"></i>List item</li>
+				</ul>
+				<ul class="unit standard has-ico" style="background: #ddd;">
+					<li><i class="ico ico-bullet"></i>List item</li>
+					<li><i class="ico ico-bullet"></i>List item</li>
+				</ul>
+			</div>
+		</div>
+		<!-- end sampleBlock -->
+	</div>
+
+	<h2 class="section-title">Basic Grid variants</h2>
+	<div class="section-wrap usage" id="basic-grids">
+
+		<h3 class="title">All variants for basic grids:</h3>
+
+		<h4 class="subtitle">Two columns</h4> 
+		<div><code class="emph">.contains-2</code></div>
+		<div class="example contains-2">
+			<div class="unit"><code>.unit</code> </div>
+			<div class="unit alt"><code>.unit</code> </div>
+		</div>
+		<!-- start codeBlock -->
+		<div class="codeBlock">
+<pre>&lt;div class="contains-2"&gt;
+	&lt;div class="unit"&gt;&lt;/div&gt;
+	&lt;div class="unit"&gt;&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+		</div><!-- end codeBlock -->
+
+		<hr>
+		<h4 class="subtitle">Three columns</h4> 
+		<div><code class="emph">.contains-3</code></div>
+		<div class="example contains-3">
+			<div class="unit"><code>.unit</code> </div>
+			<div class="unit alt"><code>.unit</code> </div>
+			<div class="unit"><code>.unit</code> </div>
+		</div>
+		<!-- start codeBlock -->
+		<div class="codeBlock">
+<pre>&lt;div class="contains-3"&gt;
+	&lt;div class="unit"&gt;&lt;/div&gt;
+	&lt;div class="unit"&gt;&lt;/div&gt;
+	&lt;div class="unit"&gt;&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+		</div><!-- end codeBlock -->
+
+		<hr>
+		<h4 class="subtitle">Four columns</h4> 
+		<div><code class="emph">.contains-4</code></div>
+		<div class="example contains-4">
+			<div class="unit"><code>.unit</code> </div>
+			<div class="unit alt"><code>.unit</code> </div>
+			<div class="unit"><code>.unit</code> </div>
+			<div class="unit alt"><code>.unit</code> </div>
+		</div>
+		<!-- start codeBlock -->
+		<div class="codeBlock">
+<pre>&lt;div class="contains-4"&gt;
+	&lt;div class="unit"&gt;&lt;/div&gt;
+	&lt;div class="unit"&gt;&lt;/div&gt;
+	&lt;div class="unit"&gt;&lt;/div&gt;
+	&lt;div class="unit"&gt;&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+		</div><!-- end codeBlock -->
+
+		<hr>
+		<h4 class="subtitle">Five columns</h4> 
+		<div><code class="emph">.contains-5</code></div>
+		<div class="example contains-5">
+			<div class="unit"><code>.unit</code> </div>
+			<div class="unit alt"><code>.unit</code> </div>
+			<div class="unit"><code>.unit</code> </div>
+			<div class="unit alt"><code>.unit</code> </div>
+			<div class="unit"><code>.unit</code> </div>
+		</div>
+		<!-- start codeBlock -->
+		<div class="codeBlock">
+<pre>&lt;div class="contains-5"&gt;
+	&lt;div class="unit"&gt;&lt;/div&gt;
+	&lt;div class="unit"&gt;&lt;/div&gt;
+	&lt;div class="unit"&gt;&lt;/div&gt;
+	&lt;div class="unit"&gt;&lt;/div&gt;
+	&lt;div class="unit"&gt;&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+		</div><!-- end codeBlock -->
+
+		<hr>
+		<h4 class="subtitle">Six columns</h4> 
+		<div><code class="emph">.contains-6</code></div>
+		<div class="example contains-6">
+			<div class="unit"><code>.unit</code> </div>
+			<div class="unit alt"><code>.unit</code> </div>
+			<div class="unit"><code>.unit</code> </div>
+			<div class="unit alt"><code>.unit</code> </div>
+			<div class="unit"><code>.unit</code> </div>
+			<div class="unit alt"><code>.unit</code> </div>
+		</div>
+		<!-- start codeBlock -->
+		<div class="codeBlock">
+<pre>&lt;div class="contains-6"&gt;
+	&lt;div class="unit"&gt;&lt;/div&gt;
+	&lt;div class="unit"&gt;&lt;/div&gt;
+	&lt;div class="unit"&gt;&lt;/div&gt;
+	&lt;div class="unit"&gt;&lt;/div&gt;
+	&lt;div class="unit"&gt;&lt;/div&gt;
+	&lt;div class="unit"&gt;&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+		</div><!-- end codeBlock -->
+	</div>
+<!-- /////////////////////////////////////
+	END basic usage	
+	///////////////////////////////////// -->
+
+
+<!-- /////////////////////////////////////
+	BEGIN unequal column distribution	
+	///////////////////////////////////// -->
+
+	<h2 class="section-title">Unequal column distribution</h2>
+	<div class="section-wrap usage" id="unequal-distribution">
+		<p>Unequal column distribution allows you to allocate more than one column to a unit. Let's say you need an image next to some text, but the image needs to take up 3/4 of the space. You can re-allocate the grid spacing using a <code>size<em>#</em>of<em>#</em></code> class.</p>
+		<p>Remember, your total number of <code>.unit</code>s must always equal to the number specified in the parent element. Below, we achieve four units because the first unit has a class of <code>.size3of4</code>. This class causes it to take up the space of three units. And the last unit takes up the last slot, leaving us with 4.</p>
+		<!-- start codeBlock -->
+		<div class="codeBlock">
+<pre>&lt;div class="contains-4"&gt;
+	&lt;div class="unit size<strong>3</strong>of<strong>4</strong>"&gt;This column takes up 3/4 of the available space&lt;/div&gt;
+	&lt;div class="unit"&gt;&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+		</div><!-- end codeBlock -->
+
+		<h4 class="subtitle"><a class="cb-image" href="/assets/img/grid/unequal-column-distribution.gif">See example image</a></h4>
+
+		<h3 class="title">Restrictions:</h3>
+		<p class="margin-top">Unequal column distribution cannot be used with <a href="#grids-with-gutters">gutters</a>.</p>
+
+		<h3 class="title">All variants for unequal column distribution:</h3>
+		<h4 class="subtitle">Three column variants</h4>
+		<div><code class="emph">.contains-3</code></div>
+		<div class="example contains-3">
+			<div class="unit combo size2of3"><code>.size2of3</code><code>.unit</code></div>
+			<div class="unit"><code>.unit</code></div>
+		</div>							
+		<h4 class="subtitle">Four column variants</h4>
+		<div><code class="emph">.contains-4</code></div>
+		<div class="example contains-4">
+			<div class="unit combo size2of4"><code>.size2of4</code><code>.unit</code></div>
+			<div class="unit"><code>.unit</code></div>
+			<div class="unit alt"><code>.unit</code></div>
+		</div>
+		<div class="example contains-4">
+			<div class="unit combo size3of4"><code>.size3of4</code><code>.unit</code></div>
+			<div class="unit"><code>.unit</code></div>
+		</div>
+		<h4 class="subtitle">Five column variants</h4>
+		<div><code class="emph">.contains-5</code></div>
+		<div class="example contains-5">
+			<div class="unit combo size2of5"><code>.size2of5</code><code>.unit</code></div>
+			<div class="unit alt"><code>.unit</code></div>
+			<div class="unit"><code>.unit</code></div>
+			<div class="unit alt"><code>.unit</code></div>
+		</div>
+		<div class="example contains-5">
+			<div class="unit combo size3of5"><code>.size3of5</code><code>.unit</code></div>
+			<div class="unit"><code>.unit</code></div>
+			<div class="unit alt"><code>.unit</code></div>
+		</div>
+		<div class="example contains-5">
+			<div class="unit combo size4of5"><code>.size4of5</code><code>.unit</code></div>
+			<div class="unit"><code>.unit</code></div>
+		</div>
+		<h4 class="subtitle">Six column variants</h4>
+		<div><code class="emph">.contains-6</code></div>
+		<div class="example contains-6">
+			<div class="unit combo size2of6"><code>.size2of6</code><code>.unit</code></div>
+			<div class="unit"><code>.unit</code></div>
+			<div class="unit"><code>.unit</code></div>
+			<div class="unit"><code>.unit</code></div>
+			<div class="unit"><code>.unit</code></div>
+		</div>
+		<div class="example contains-6">
+			<div class="unit combo size3of6"><code>.size3of6</code><code>.unit</code></div>
+			<div class="unit"><code>.unit</code></div>
+			<div class="unit alt"><code>.unit</code></div>
+			<div class="unit"><code>.unit</code></div>
+		</div>
+		<div class="example contains-6">
+			<div class="unit combo size4of6"><code>.size4of6</code><code>.unit</code></div>
+			<div class="unit"><code>.unit</code></div>
+			<div class="unit alt"><code>.unit</code></div>
+		</div>
+		<div class="example contains-6">
+			<div class="unit combo size5of6"><code>.size5of6</code><code>.unit</code></div>
+			<div class="unit"><code>.unit</code></div>
+		</div>
+	</div>
+<!-- /////////////////////////////////////
+	END unequal column distribution	
+	///////////////////////////////////// -->
+
+
+<!-- /////////////////////////////////////
+	BEGIN gutters	
+	///////////////////////////////////// -->
+
+	<h2 class="section-title">Gutters</h2>
+	<div class="section-wrap usage" id="grids-with-gutters">
+		<p>Gutters will add a predetermined amount of space between each <code>.unit</code>. We have small, medium, large and extra large gutters, which are percentage-based. Simply add the class <code>.has-gutter</code> and the gutter sizing you want, for example medium gutter: <code>.gutter-md</code> to the parent container.</p>
+		<!-- start codeBlock -->
+		<div class="codeBlock">
+<pre>&lt;div class="contains-2 <strong>has-gutter gutter-md</strong>"&gt;
+	&lt;div class="unit"&gt;&lt;/div&gt;
+	&lt;div class="unit"&gt;&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+		</div><!-- end codeBlock -->
+
+		<h3 class="title">Restrictions:</h3>
+		<p>Gutters can only be used with the basic implementation. They are not compatible with <a href="#unequal-columns">unequal column distribution</a></p>
+		<h3 class="title">All variants for gutters:</h3>
+
+		<h4 class="subtitle">Small gutter (2%) </h4>
+		<div><code class="emph">.has-gutter</code><code class="emph">.gutter-sm</code></div>
+		<div class="sizeCS">
+			<div class="example contains-4 has-gutter gutter-sm">
+				<div class="unit"><code>.unit</code></div>
+				<div class="unit"><code>.unit</code></div>
+				<div class="unit"><code>.unit</code></div>
+				<div class="unit"><code>.unit</code></div>
+			</div>
+		</div>
+		<div class="sizeC">
+			<div class="example contains-4 has-gutter gutter-sm">
+				<div class="unit"><code>.unit</code></div>
+				<div class="unit"><code>.unit</code></div>
+				<div class="unit"><code>.unit</code></div>
+				<div class="unit"><code>.unit</code></div>
+			</div>
+		</div>
+		<hr>
+		<h4 class="subtitle">Medium gutter (5%) </h4>
+		<div><code class="emph">.has-gutter</code><code class="emph">.gutter-md</code></div>
+		<div class="sizeCS">
+			<div class="example contains-4 has-gutter gutter-md">
+				<div class="unit"><code>.unit</code></div>
+				<div class="unit"><code>.unit</code></div>
+				<div class="unit"><code>.unit</code></div>
+				<div class="unit"><code>.unit</code></div>
+			</div>
+		</div>
+		<div class="sizeC">
+			<div class="example contains-4 has-gutter gutter-md">
+				<div class="unit"><code>.unit</code></div>
+				<div class="unit"><code>.unit</code></div>
+				<div class="unit"><code>.unit</code></div>
+				<div class="unit"><code>.unit</code></div>
+			</div>
+		</div>
+		<hr>
+		<h4 class="subtitle">Large gutter (7%) </h4>
+		<div><code class="emph">.has-gutter</code><code class="emph">.gutter-lg</code></div>
+		<div class="sizeCS">
+			<div class="example contains-4 has-gutter gutter-lg">
+				<div class="unit"><code>.unit</code></div>
+				<div class="unit"><code>.unit</code></div>
+				<div class="unit"><code>.unit</code></div>
+				<div class="unit"><code>.unit</code></div>
+			</div>
+		</div>
+		<div class="sizeC">
+			<div class="example contains-4 has-gutter gutter-lg">
+				<div class="unit"><code>.unit</code></div>
+				<div class="unit"><code>.unit</code></div>
+				<div class="unit"><code>.unit</code></div>
+				<div class="unit"><code>.unit</code></div>
+			</div>
+		</div>
+		<hr>
+		<h4 class="subtitle">Extra large gutter (10%) </h4>
+		<div><code class="emph">.has-gutter</code><code class="emph">.gutter-xl</code></div>
+		<div class="sizeCS">
+			<div class="example contains-4 has-gutter gutter-xl">
+				<div class="unit"><code>.unit</code></div>
+				<div class="unit"><code>.unit</code></div>
+				<div class="unit"><code>.unit</code></div>
+				<div class="unit"><code>.unit</code></div>
+			</div>
+		</div>
+		<div class="example contains-4 has-gutter gutter-xl">
+			<div class="unit"><code>.unit</code></div>
+			<div class="unit"><code>.unit</code></div>
+			<div class="unit"><code>.unit</code></div>
+			<div class="unit"><code>.unit</code></div>
+		</div>
+	</div>
+
+<!-- /////////////////////////////////////
+	END gutters	
+	///////////////////////////////////// -->
+
+<!-- /////////////////////////////////////
+	BEGIN nested	
+	///////////////////////////////////// -->
+
+	<h2 class="section-title">Nested grids</h2>
+	<div class="section-wrap usage" id="nested-grids">
+		<p>Contains grids can be nested in any configuration. The grid will automatically adapt.</p>
+		<div><code>.contains-2</code> &gt; <code>.contains-4</code></div>
+		<div class="example contains-2">
+			<div class="unit contains-4">
+				<div class="unit"><code>.unit</code></div>
+				<div class="unit"><code>.unit</code></div>
+				<div class="unit"><code>.unit</code></div>
+				<div class="unit"><code>.unit</code></div> 
+			</div>
+			<div class="unit"><code>.unit</code></div>
+		</div>
+
+		<!-- start codeBlock -->
+		<div class="codeBlock">
+<pre>&lt;div class="contains-2 "&gt;
+	&lt;div class="unit contains-4 "&gt;
+		&lt;div class="unit"&gt;Lorem&lt;/div&gt;
+		&lt;div class="unit"&gt;Lorem&lt;/div&gt;
+		&lt;div class="unit"&gt;Lorem&lt;/div&gt;
+		&lt;div class="unit"&gt;Lorem&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class="unit"&gt;&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+		</div><!-- end codeBlock -->
+
+	</div>
+<!-- /////////////////////////////////////
+	END nested	
+	///////////////////////////////////// -->
+
+
+
+
+<!-- /////////////////////////////////////
+	BEGIN image sprites
+	///////////////////////////////////// -->
+	<h2 class="section-title">Image sprites for sizing</h2>
+	<div class="section-wrap usage" id="sizing-sprites">
+		<p>Use these images to get exact pixel widths for grids and gutters.</p>
+		<h3 class="title">Gutter sprites:</h3>
+		<p><a class="cb-image" href="assets/img/grid/contains-gutter-680.gif"><strong>680 gutter sprite</strong></a><br><a class="cb-image" href="assets/img/grid/contains-gutter-980.gif"><strong>980 gutter sprite</strong></a></p>
+	</div>
+
+<!-- /////////////////////////////////////
+	END image sprites
+	///////////////////////////////////// -->
+
+</div>
+
+
+</article>
+
+</div>
+</section>
+</div>
+</div>
+
+</body>

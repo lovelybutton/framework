@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>PROTO: Type Tool</title>
+
+	
+	<script src="assets/script/lib.js" type="text/javascript"></script>
+	<script src="assets/script/script.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="assets/css/global.css">
+
+
+	<!-- base proto stylesheets and script files -->
+	<script src="assets/script/proto-script.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="assets/css/proto-style.css">
+
+	<style type="text/css">
+	.title{display:block; font:17px/39px 'Opensans-semibold'; color:#fff; background:#0c51a3; padding:0 10px; border-bottom:3px solid #202d3d;}
+	.options-row{background:#f0f3f5; border-bottom:1px solid #bfc4c8; padding:10px; overflow:hidden;}
+	.box{float:left; margin-right:20px; overflow:hidden;}
+	.box.checkbox{padding-top:16px; margin-right:7px; margin-bottom:0;}
+	label{display:block; font:normal 11px/17px Verdana, Geneva, sans-serif; color:#333;}
+	label.for-checkbox{margin:1px 0 0 2px; width: initial;}
+	select{width:100px;}
+	input.checkbox{float:left;}
+	input.text{height:33px; width:50%; font:12px Verdana, sans-serif; padding:7px;}
+	label.for-text{font:normal 12px/33px Verdana, sans-serif; padding:0 10px 0 0; float:left;}
+	#classes-wrap{font:normal 11px/29px Verdana, sans-serif; display:block; color:#fff; overflow:hidden; background:#8c9bac;}
+	#classes-wrap a{color:#283545;}
+	#classes-wrap span{display:block; padding:0 10px;}
+	.classes-title{background:#283545;}
+	#output-wrap{padding:20px 0;}
+	#tool-output-classes{font:normal 11px/25px Verdana, sans-serif;}
+	#tool-output-classes span{background:none repeat scroll 0 0 #fff; border:1px solid #D4E0E8; border-radius:4px; padding:3px 6px; line-height:21px;}
+	</style>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+		generateFontClasses();
+		$('#tool-output').html($('#tool-sample-input').val());
+
+		$('select, input').change(function(){
+			generateFontClasses();
+		});
+		$('#tool-sample-input').keyup(function(){
+			$('#tool-output').html($(this).val());
+		});
+		$('.reset').click(function(){
+			$('select').children('option.default').attr('selected', 'selected');
+			$('input').removeAttr('checked');
+			$('#tool-sample-input').val('The quick brown fox jumps over the lazy dog');
+			$('#tool-sample-input').trigger('keyup');
+			generateFontClasses();
+			return false;
+		});
+		$('#tool-sample-input').blur(function(){
+			if(!$(this).val()){
+				$(this).val('The quick brown fox jumps over the lazy dog');
+				$(this).trigger('keyup');
+			}
+		});
+		$('#tool-sample-input').focus(function(){
+			if($(this).val() == 'The quick brown fox jumps over the lazy dog'){
+				$(this).val('');
+			}
+		});
+	});
+	function generateFontClasses(){
+		var appliedClasses = "";
+		var testClasses = "";
+		if($('#tool-font-family').children('option:selected').index() != 1 && $('#tool-font-weight').children('option:selected').index() == 1){
+			$('#tool-font-weight').children('option:eq(2)').attr('selected', 'selected');
+		}
+		$('#tool-wrap select').each(function(index){
+			if($(this).attr('name') == "tool-font-family"){
+				appliedClasses += $(this).children('option:selected').val() + "-";
+				testClasses += "<span>" + $(this).children('option:selected').val() + "-";
+			}
+			else if($(this).attr('name') == "tool-font-weight"){
+				appliedClasses += $(this).children('option:selected').val() + " ";
+				testClasses += $(this).children('option:selected').val() + "</span>&nbsp;";
+			}
+			else{
+				appliedClasses += $(this).children('option:selected').val() + " ";
+				testClasses += "<span>" + $(this).children('option:selected').val() + "</span>&nbsp;";
+			}
+		});
+		$('#tool-wrap input:checked').each(function(index){
+			appliedClasses += $(this).attr('name') + " ";
+			testClasses += "<span>" + $(this).attr('name') + "</span>&nbsp;";
+		});
+
+		appliedClasses = appliedClasses.slice(0, appliedClasses.length - 1);
+		testClasses = testClasses.slice(0, testClasses.length - 6);
+
+		$('#tool-output-classes').html(testClasses);
+		$('#tool-output').removeClass();
+		$('#tool-output').addClass(appliedClasses);
+	}
+	</script>
+</head>
+<body>
+	<div id="global_container">
+		<nav class="pro-nav">
+			<div class="pro-home"><a href="../proto/">Proto Home</a></div>
+			<div class="pro-nav-expandable expandableSet">
+				<dl class="pro-menu">
+					<dt class="pro-menu-title"><i class="ico ico-menu"></i><div class="title-text">PROTO MENU</div></dt>
+					<dd class="pro-menu-body clearfix">
+						<div class="pro-nav-cat-wrap">
+							<div class="pro-nav-cat">Modules</div>
+							<ul class="pro-nav-list clearfix">
+								<li class="pro-nav-background"><a href="background.html">Background</a></li>
+								<li class="pro-nav-border"><a href="border.html">Border</a></li>
+								<li class="pro-nav-button"><a href="button.html">Button</a></li>
+								<li class="pro-nav-grid"><a href="grid.html">Grid</a></li>
+								<li class="pro-nav-icon"><a href="icon.html">Icon</a></li>
+								<li class="pro-nav-tab"><a href="tab.html">Tab</a></li>
+								<li class="pro-nav-table"><a href="table.html">Table</a></li>
+								<li class="pro-nav-thumbnail"><a href="thumbnail.html">Thumbnail</a></li>
+								<li class="pro-nav-typography current"><span class="pro-nav-title">Typography:</span> <a href="type-tool.html">tool</a>, <a href="typography.html">general usage</a>, <a href="list.html">lists</a></li>
+							
+								<li class="pro-nav-expandable-set"><a href="expandable-set.html">Expandable Set</a></li>
+								<li class="pro-nav-flag"><a href="flag.html">Flag</a></li>
+								<li class="pro-nav-form"><a href="form.html">Form</a></li>
+								<li class="pro-nav-modal"><a href="modal.html">Modal</a></li>
+								
+							</ul>
+						</div>
+					</dd>
+				</dl>
+			</div>
+		</nav>
+
+		<div class="rowGroup mainContent" id="mc">
+			<section class="row pattern-C">
+				<div class="row-inner">
+					<article class="C">
+						<div class="contains-5">
+							<div class="unit size3of5">
+								<h1 class="margin-bottom">Proto Type Tool</h1>
+							</div>
+							<div class="unit size2of5">
+								<p class="gotolink clearfix"><span class="floatR"><a class="selected" href="type-tool.html">Type tool</a> <a href="typography.html">Typography</a> <a href="list.html">Lists</a></span></p>
+							</div>
+						</div>
+						<div id="tool-wrap"> <span class="title">Typography class generator</span>
+							<div class="options-row">
+								<div class="box">
+									<label for="tool-font-size">Font Size</label>
+									<select name="tool-font-size" id="tool-font-size">
+										<option value="txt-10">Size 10</option>
+										<option value="txt-11">Size 11</option>
+										<option value="txt-12" class="default" selected>Size 12</option>
+										<option value="txt-13">Size 13</option>
+										<option value="txt-14">Size 14</option>
+										<option value="txt-15">Size 15</option>
+										<option value="txt-17">Size 17</option>
+										<option value="txt-18">Size 18</option>
+										<option value="txt-25">Size 25</option>
+									</select>
+								</div>
+								<div class="box">
+									<label for="tool-font-family">Font Family</label>
+									<select name="tool-font-family" id="tool-font-family">
+										<option value="txt-Verdana" class="default" selected>Verdana</option>
+										<option value="txt-Opensans">Open Sans</option>
+										<option value="txt-Arial">Arial</option>
+									</select>
+								</div>
+								<div class="box">
+									<label for="tool-font-weight">Font Weight</label>
+									<select name="tool-font-weight" id="tool-font-weight">
+										<option value="regular" class="default" selected>Regular</option>
+										<option value="semibold">Semibold</option>
+										<option value="bold">Bold</option>
+									</select>
+								</div>
+								<div class="box">
+									<label for="tool-font-color">Font Color</label>
+									<select name="tool-font-color" id="tool-font-color">
+										<option value="txt-dark-grey" class="default" selected>Dark Grey</option>
+										<option value="txt-light-grey">Light Grey</option>
+										<option value="txt-blue">Blue</option>
+										<option value="txt-yellow">Yellow</option>
+									</select>
+								</div>
+								<div class="box checkbox">
+									<input type="checkbox" class="checkbox" name="txt-caps" id="txt-caps">
+									<label for="txt-caps" class="for-checkbox">All Caps</label>
+								</div>
+								<div class="box checkbox">
+									<input type="checkbox" class="checkbox" name="txt-underline" id="txt-underline">
+									<label for="txt-underline" class="for-checkbox">Underline</label>
+								</div>
+							</div>
+							<div class="options-row">
+								<label for="tool-sample-input" class="for-text">Sample text:</label>
+								<input name="tool-sample-input" class="text" id="tool-sample-input" value="The quick brown fox jumps over the lazy dog">
+							</div>
+							<div id="output-wrap">
+								<span id="tool-output" class=""></span>
+							</div>
+							<span id="classes-wrap"> <span class="classes-title floatL">Applied classes:</span>  <span class="floatR"><a href="#" class="reset">reset</a></span> </span>
+							<div class="options-row">
+								<div id="tool-output-classes"></div>
+							</div>
+						</div>	
+						<h3>Notes</h3>
+						<ul class="has-ico standard">
+							<li><i class="ico ico-bullet"></i>There is no semibold variant for Arial or Verdana.</li>    
+						</ul>
+					</article>
+				</div>
+			</section>
+		</div>
+	</div>
+</body>
+
+</html>

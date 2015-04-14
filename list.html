@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>PROTO: Typography</title>
+
+    
+    <script src="assets/script/lib.js" type="text/javascript"></script>
+    <script src="assets/script/script.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="assets/css/global.css">
+
+
+    <!-- base proto stylesheets and script files -->
+    <script src="assets/script/proto-script.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="assets/css/proto-style.css">
+
+    <style>
+    ul.code{
+      border-bottom:2px solid #9eb1c5;
+      padding:1px 0;
+      margin:10px 0 20px;
+  }
+  ul.code li{
+      padding:5px 10px;
+      background:#f9fbfe;
+      font:11px/20px monospace;
+      color:#6a7a8b;
+  }
+  ul.code li:nth-child(even){
+      background:#f1f5f9;
+  }
+  </style>
+
+</head>
+
+<body>
+	<div id="global_container">
+        <nav class="pro-nav">
+            <div class="pro-home"><a href="../proto/">Proto Home</a></div>
+            <div class="pro-nav-expandable expandableSet">
+                <dl class="pro-menu">
+                    <dt class="pro-menu-title"><i class="ico ico-menu"></i><div class="title-text">PROTO MENU</div></dt>
+                    <dd class="pro-menu-body clearfix">
+                        <div class="pro-nav-cat">Modules</div>
+                        <div class="pro-nav-cat-wrap">
+                            <ul class="pro-nav-list clearfix">
+                                <li class="pro-nav-background"><a href="background.html">Background</a></li>
+                                <li class="pro-nav-border"><a href="border.html">Border</a></li>
+                                <li class="pro-nav-button"><a href="button.html">Button</a></li>
+                                <li class="pro-nav-grid"><a href="grid.html">Grid</a></li>
+                            </ul>
+                          </div>
+                          <div class="pro-nav-cat-wrap">
+                            <ul class="pro-nav-list clearfix">
+                                <li class="pro-nav-icon"><a href="icon.html">Icon</a></li>
+                                <li class="pro-nav-tab"><a href="tab.html">Tab</a></li>
+                                <li class="pro-nav-table"><a href="table.html">Table</a></li>
+                                <li class="pro-nav-thumbnail"><a href="thumbnail.html">Thumbnail</a></li>
+                                <li class="pro-nav-typography current"><span class="pro-nav-title">Typography:</span> <a href="type-tool.html">tool</a>, <a href="typography.html">general usage</a>, <a href="list.html">lists</a></li>
+                            </ul>
+                        </div>
+                        <div class="pro-nav-cat-wrap">
+                            <div class="pro-nav-cat">Complex Modules</div>
+                            <ul class="pro-nav-list clearfix">
+                                <li class="pro-nav-expandable-set"><a href="expandable-set.html">Expandable Set</a></li>
+                                <li class="pro-nav-flag"><a href="flag.html">Flag</a></li>
+                                <li class="pro-nav-form"><a href="form.html">Form</a></li>
+                                <li class="pro-nav-modal"><a href="modal.html">Modal</a></li>
+                                
+                            </ul>
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+        </nav>
+
+        <div class="rowGroup mainContent" id="mc">
+          <section class="row pattern-C">
+             <div class="row-inner">
+                <article class="C">
+                   <h1 class="margin-bottom">Proto Typography Lists</h1>
+                   
+                 <h3>Standard Unordered Lists</h3>
+                 <p>Adding the class <strong>.standard</strong> to a list will give it margin and padding consistent with the design of Proto. Adding the class <strong>.has-ico</strong> to a list will prepare it to accept icons as bullets. By default, standard lists will have no icons or bullets. To create bullets you will need to add an icon to each list item. The standard bullet icon has a class of <strong>.ico-bullet</strong>. See the example below:</p>
+                 <ul class="standard has-ico">
+                  <li><i class="ico ico-bullet"></i>The icon in this list item has only the classes <strong>.ico</strong> and <strong>.ico-bullet</strong></li>
+                  <li><i class="ico ico-bullet ico-simple-blue"></i>The icon in this list has an additional class of <strong>.ico-simple-blue</strong></li>
+                  <li><i class="ico ico-bullet ico-simple-yellow"></i>The icon in this list has an additional class of <strong>.ico-simple-yellow</strong></li>
+                  <li><i class="ico ico-bullet ico-simple-light-grey"></i>The icon in this list has an additional class of <strong>.ico-simple-light-grey</strong></li>
+              </ul>
+
+              <h3>Unordered Lists with Simple Icons</h3>
+              <p>To add icons which are represented on <a href="icon.html">icon.html</a> you will first need to determine which size icon from the simple icons is required. Valid sizes are small, medium and large. <span class="txt-yellow txt-caps"><strong>Extra large icons are not supported in lists. You cannot mix different size icons in the same list.</strong></span> Once the required size is determined you will need to give the list an additional class of <strong>.list-ico-sm</strong>, <strong>.list-ico-md</strong>, or <strong>.list-ico-lg</strong>.</p>
+
+              <h4 class="txt-light-grey">Small Icons</h4>
+              <ul class="flush-top standard has-ico list-ico-sm">
+               <li><i class="ico ico-simple-blue ico-arrow-right-sm"></i>This list has an additional class of <strong>.list-ico-sm</strong> and all list items have an icon with a class of <strong>.ico-arrow-right-sm</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-right-sm"></i>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ut risus non nunc placerat porta sit amet nec massa.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-right-sm"></i>Aenean sit amet nulla est, vitae ullamcorper mi. Morbi eget nunc nec augue dictum porta.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-right-sm"></i>Quisque ac metus elit, eu pulvinar tellus. Integer velit nisi, accumsan at ultricies vel, mattis at eros. Ut sagittis consequat ipsum a mollis.</li>
+           </ul>
+           <p>Below you can see a list with all possible small icons:</p>
+           <ul class="standard has-ico list-ico-sm">
+               <li><i class="ico ico-simple-blue ico-arrow-right-sm"></i>The icon in this list item has a class of <strong>.ico-arrow-right-sm</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-right-2-sm"></i>The icon in this list item has a class of <strong>.ico-arrow-right-2-sm</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-down-sm"></i>The icon in this list item has a class of <strong>.ico-arrow-down-sm</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-up-sm"></i>The icon in this list item has a class of <strong>.ico-arrow-up-sm</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-check-sm"></i>The icon in this list item has a class of <strong>.ico-check-sm</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-triangle-right-sm"></i>The icon in this list item has a class of <strong>.ico-triangle-right-sm</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-triangle-down-sm"></i>The icon in this list item has a class of <strong>.ico-triangle-down-sm</strong>.</li>
+           </ul>
+
+           <h4 class="txt-light-grey">Medium Icons</h4>
+           <p class="txt-11 txt-light-grey">medium icon lists have 4px additional bottom padding on their list items</p>
+           <ul class="standard has-ico list-ico-md">
+               <li><i class="ico ico-simple-blue ico-arrow-right-md"></i>This list has an additional class of <strong>.list-ico-md</strong> and all list items have an icon with a class of <strong>.ico-arrow-right-md</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-right-md"></i>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ut risus non nunc placerat porta sit amet nec massa.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-right-md"></i>Aenean sit amet nulla est, vitae ullamcorper mi. Morbi eget nunc nec augue dictum porta.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-right-md"></i>Quisque ac metus elit, eu pulvinar tellus. Integer velit nisi, accumsan at ultricies vel, mattis at eros. Ut sagittis consequat ipsum a mollis.</li>
+           </ul>
+           <p>Below you can see a list with all possible medium icons:</p>
+           <ul class="standard has-ico list-ico-md">
+               <li><i class="ico ico-simple-blue ico-arrow-right-md"></i>The icon in this list item has a class of <strong>.ico-arrow-right-md</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-check-md"></i>The icon in this list item has a class of <strong>.ico-check-md</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-plus-md"></i>The icon in this list item has a class of <strong>.ico-plus-md</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-triangle-right-md"></i>The icon in this list item has a class of <strong>.ico-triangle-right-md</strong>.</li>
+           </ul>
+
+           <h4 class="txt-light-grey">Large Icons</h4>
+           <p class="txt-11 txt-light-grey">large icon lists have 8px additional bottom padding on their list items</p>
+           <ul class="standard has-ico list-ico-lg">
+               <li><i class="ico ico-simple-blue ico-arrow-right-lg"></i>This list has an additional class of <strong>.list-ico-lg</strong> and all list items have an icon with a class of <strong>.ico-arrow-right-lg</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-right-lg"></i>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ut risus non nunc placerat porta sit amet nec massa.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-right-lg"></i>Aenean sit amet nulla est, vitae ullamcorper mi. Morbi eget nunc nec augue dictum porta.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-right-lg"></i>Quisque ac metus elit, eu pulvinar tellus. Integer velit nisi, accumsan at ultricies vel, mattis at eros. Ut sagittis consequat ipsum a mollis.</li>
+           </ul>
+           <p>Below you can see a list with all possible large icons:</p>
+           <ul class="standard has-ico list-ico-lg">
+               <li><i class="ico ico-simple-blue ico-arrow-right-lg"></i>The icon in this list item has a class of <strong>.ico-arrow-right-lg</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-right-circled-lg"></i>The icon in this list item has a class of <strong>.ico-arrow-right-circled-lg</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-down-circled-lg"></i>The icon in this list item has a class of <strong>.ico-arrow-down-circled-lg</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-check-lg"></i>The icon in this list item has a class of <strong>.ico-check-lg</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-circle-lg"></i>The icon in this list item has a class of <strong>.ico-circle-lg</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-plus-lg"></i>The icon in this list item has a class of <strong>.ico-plus-lg</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-triangle-right-lg"></i>The icon in this list item has a class of <strong>.ico-triangle-right-lg</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-triangle-down-lg"></i>The icon in this list item has a class of <strong>.ico-triangle-down-lg</strong>.</li>
+           </ul>
+
+           <h4 class="txt-light-grey">Extra large Icons</h4>
+           <p class="txt-11 txt-light-grey">Extra large icon lists have 12px additional bottom padding on their list items. Beyond this, you will most likely have to create custom styles to modify the spacing and font treatment of your lists. Extra large icon lists will tend to be in banners and other more highly-customized locations.</p>
+           <ul class="standard has-ico list-ico-xl">
+               <li><i class="ico ico-simple-blue ico-plus-xl"></i>This list has an additional class of <strong>.list-ico-xl</strong> and all list items have an icon with a class of <strong>.ico-plus-xl</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-plus-xl"></i>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ut risus non nunc placerat porta sit amet nec massa.</li>
+               <li><i class="ico ico-simple-blue ico-plus-xl"></i>Aenean sit amet nulla est, vitae ullamcorper mi. Morbi eget nunc nec augue dictum porta.</li>
+               <li><i class="ico ico-simple-blue ico-plus-xl"></i>Quisque ac metus elit, eu pulvinar tellus. Integer velit nisi, accumsan at ultricies vel, mattis at eros. Ut sagittis consequat ipsum a mollis.</li>
+           </ul>
+           <p>Below you can see a list with all possible extra large icons:</p> 
+           <ul class="standard has-ico list-ico-xl">
+               <li><i class="ico ico-simple-blue ico-plus-xl"></i>The icon in this list item has a class of <strong>.ico-plus-xl</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-search-xl"></i>The icon in this list item has a class of <strong>.ico-search-xl</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-check-xl"></i>The icon in this list item has a class of <strong>.ico-check-xl</strong>.</li>
+           </ul>
+
+           <h3>Unordered Lists with Complex Icons</h3>
+           <p>A limited number of the <a href="../icon.html#complex">complex icons</a> are available to use as list bullets, as well. When using complex icons no additional classes are required for the list. Simply give the list the classes <strong>.standard</strong> and <strong>.has-ico</strong>. The following complex icons are available:</p>
+           <h5>PDF</h5>
+           <ul class="flush-top standard has-ico">
+               <li><i class="ico ico-complex ico-pdf"></i>Suspendisse placerat consectetur ipsum, et porta lacus fermentum id.</li>
+               <li><i class="ico ico-complex ico-pdf"></i>Nulla eu varius enim. Morbi lacus purus, semper eget scelerisque vitae, blandit at dolor.</li>
+               <li><i class="ico ico-complex ico-pdf"></i>Cras ultrices ipsum non odio fermentum volutpat tristique dui pharetra. </li>
+           </ul>
+           <h5>Article Small</h5>
+           <ul class="flush-top standard has-ico">
+               <li><i class="ico ico-complex ico-article-sm"></i>Suspendisse placerat consectetur ipsum, et porta lacus fermentum id.</li>
+               <li><i class="ico ico-complex ico-article-sm"></i>Nulla eu varius enim. Morbi lacus purus, semper eget scelerisque vitae, blandit at dolor.</li>
+               <li><i class="ico ico-complex ico-article-sm"></i>Cras ultrices ipsum non odio fermentum volutpat tristique dui pharetra. </li>
+           </ul>
+           <h5>Resource</h5>
+           <ul class="flush-top standard has-ico">
+               <li><i class="ico ico-complex ico-resource"></i>Suspendisse placerat consectetur ipsum, et porta lacus fermentum id.</li>
+               <li><i class="ico ico-complex ico-resource"></i>Nulla eu varius enim. Morbi lacus purus, semper eget scelerisque vitae, blandit at dolor.</li>
+               <li><i class="ico ico-complex ico-resource"></i>Cras ultrices ipsum non odio fermentum volutpat tristique dui pharetra. </li>
+           </ul>
+           <h5>Info</h5>
+           <ul class="flush-top standard has-ico">
+               <li><i class="ico ico-complex ico-info"></i>Suspendisse placerat consectetur ipsum, et porta lacus fermentum id.</li>
+               <li><i class="ico ico-complex ico-info"></i>Nulla eu varius enim. Morbi lacus purus, semper eget scelerisque vitae, blandit at dolor.</li>
+               <li><i class="ico ico-complex ico-info"></i>Cras ultrices ipsum non odio fermentum volutpat tristique dui pharetra. </li>
+           </ul>
+           <h5>Video Small</h5>
+           <ul class="flush-top standard has-ico">
+               <li><i class="ico ico-complex ico-video-sm"></i>Suspendisse placerat consectetur ipsum, et porta lacus fermentum id.</li>
+               <li><i class="ico ico-complex ico-video-sm"></i>Nulla eu varius enim. Morbi lacus purus, semper eget scelerisque vitae, blandit at dolor.</li>
+               <li><i class="ico ico-complex ico-video-sm"></i>Cras ultrices ipsum non odio fermentum volutpat tristique dui pharetra. </li>
+           </ul>
+           <h3>Ordered Lists</h3>
+           <p>Ordered lists do not require additional markup. Simply add the class <strong>.standard</strong> to the list, and construct the list as you normally would.</p>
+           <ol class="standard">
+               <li>To create a standard unordered list, add the class <strong>.standard</strong> to the ol.</li>
+               <li>This list requires no additional classes or markup.</li> 
+               <li>Fusce placerat luctus pretium.</li>
+               <li>Nunc imperdiet interdum lacinia.</li>
+               <li>Duis sollicitudin lobortis mi, placerat porta tellus dignissim quis.</li>
+               <li>Cras facilisis eleifend augue non porta.</li>
+               <li>Mauris id tortor at nulla lobortis consequat.</li>
+               <li>Praesent feugiat lobortis magna, non commodo mauris posuere ut.</li>
+               <li>Maecenas cursus imperdiet varius.</li>
+               <li>Nulla a sapien justo, eget facilisis neque.</li>
+           </ol>
+
+           <h3>Unordered list with titles on left</h3>
+           <ul class="list-titled-items">
+              <li class="item">
+               <span class="item-title">Titled List</span>
+               <span class="item-body">This is a list that has a title to the left of each list item. The class name is .list-titled-items and each list item must contain two inner elements, <strong>.item-title</strong> and <strong>.item-body</strong>. This list does not require an &lt;i&gt; element since it is replaced with .item-title.</span>
+           </li>
+       </ul>
+
+       <h3>Ordered list with large numbers</h3>
+       <ol class="list-steps list-steps-large">
+          <li class="step">
+           <i class="ico step-num">1</i>
+           <span class="step-title">The title of the list item</span>
+           This list has two classes, <strong>.list-steps</strong> and <strong>.list-steps-large</strong>. It requires the number of the item to be inside the &lt;i&gt; tag, and the title to be inside an element with the .step-title class. After that you can add any content. Simple text does not need to be in an element.
+       </li>
+   </ol>
+
+   <h3>Ordered list with small numbers</h3>
+   <ol class="list-steps list-steps-small">
+      <li class="step">
+       <i class="ico step-num">1</i>
+       <span class="step-title">An obviously smaller list title</span>
+       This list also has two classes, <strong>.list-steps</strong> and <strong>.list-steps-large</strong>. Again, the number of the item goes inside the &lt;i&gt; tag, the .step-title element follows, and then content is added after that.
+   </li>
+</ol>
+
+</article>
+</div>
+</section>
+</div>
+</div>
+</body>
+
+</html>

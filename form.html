@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Proto: Forms</title>
+
+	<script src="assets/script/lib.js" type="text/javascript"></script>
+	<script src="assets/script/script.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="assets/css/global.css">
+
+
+	<script src="assets/script/proto-script.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="assets/css/proto-style.css">
+	<link rel="stylesheet" href="assets/css/proto-form.css">
+
+	<script src="assets/script/highlight.js/highlight.pack.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="assets/css/highlight.js/default.css">
+	<link rel="stylesheet" href="assets/css/highlight.js/googlecode.css">
+
+	<script> 
+		function constructTocItems(items) {
+			var links = $();
+			for (var i = 0; i < items.length; i++) {
+				var el = document.createElement('li');
+				var link = document.createElement('a');
+				link.href = ('#' + items[i]);
+				var linkText = document.createTextNode(items[i].replace(/-/g, ' '));
+
+				link.appendChild(linkText);
+				el.appendChild(link);
+
+				links = links.add($(el));
+			}
+			return links;
+		}
+
+		$(document).ready(function(){
+			/* Generate table of contents dynamically:
+
+			- TOC is constructed by indexing each $('.section-wrap'), grabbing its ID and setting it as a TOC item
+			- While script is collecting table of content items, it also inserts a "back to top" link after each section
+			- TOCs are local to a current tab ($('.tab-content-body'));
+
+			NOTE TO DEVELOPER: 
+			Since the script uses ID to generate the table of contents, if you remove the ID from a .section-wrap, that element will not be included in the TOC.
+
+			*/
+			var usageToc = [];
+
+			$('.section-wrap').each(function(){
+
+				// add "back to top" link at the end of each section
+				$(this).after('<div class="toTop"><a href="#top">back to top</a></div>');
+
+				// collect ids to construct table of contents
+				if($(this).attr('id') !== ''){
+					usageToc.push($(this).attr('id')); 
+				}
+			});
+
+			// add table of contents links to DOM
+			$('.toc').append(constructTocItems(usageToc));
+		});
+	</script>
+</head>
+
+<body id="top">
+	<div id="global_container">
+		<nav class="pro-nav">
+			<div class="pro-home"><a href="../proto/">Proto Home</a></div>
+			<div class="pro-nav-expandable expandableSet">
+				<dl class="pro-menu">
+					<dt class="pro-menu-title"><i class="ico ico-menu"></i><div class="title-text">PROTO MENU</div></dt>
+					<dd class="pro-menu-body clearfix">
+							<div class="pro-nav-cat">Modules</div>
+						<div class="pro-nav-cat-wrap">
+							<ul class="pro-nav-list clearfix">
+								<li class="pro-nav-background"><a href="background.html">Background</a></li>
+								<li class="pro-nav-border"><a href="border.html">Border</a></li>
+								<li class="pro-nav-button"><a href="button.html">Button</a></li>
+								<li class="pro-nav-expandable-set"><a href="expandable-set.html">Expandable Set</a></li>
+								<li class="pro-nav-flag"><a href="flag.html">Flag</a></li>
+								<li class="pro-nav-form current"><a href="form.html">Form</a></li>
+								<li class="pro-nav-grid"><a href="grid.html">Grid</a></li>
+								</ul>
+						</div>
+						<div class="pro-nav-cat-wrap">
+							<ul class="pro-nav-list clearfix">
+								<li class="pro-nav-icon"><a href="icon.html">Icon</a></li>
+								<li class="pro-nav-modal"><a href="modal.html">Modal</a></li>
+								<li class="pro-nav-tab"><a href="tab.html">Tab</a></li>
+								<li class="pro-nav-table"><a href="table.html">Table</a></li>
+								<li class="pro-nav-thumbnail"><a href="thumbnail.html">Thumbnail</a></li>
+								<li class="pro-nav-typography"><a href="typography.html">Typography</a></li>
+							
+								
+							</ul>
+
+						</div>
+					</dd>
+				</dl>
+			</div>
+		</nav>
+		<div class="rowGroup">
+			<section class="row pattern-C">
+				<div class="row-inner">
+					<article class="C">
+						<h1>Forms</h1>
+					</article>
+				</div>
+			</section>
+		</div>
+       
+		<div class="rowGroup ">
+			<section class="row pattern-C">
+				<div class="row-inner">
+					<article class="C"> 
+						<h2>Form Usage</h2>
+						<div class="toc-wrap">
+							<p class="toc-title">Table of Contents:</p>
+							<ul class="toc list-inline-block"></ul>
+						</div>
+						<h2 class="lead-in">The code here represents all markup for standard forms. Each section describes a specific aspect of the form modules, including required and optional classes, as well as considerations for style variations.</h2>
+						<h3>Form Structure</h3>
+						<div class="section-wrap usage" id="types-of-forms">
+							<h4 class="txt-13">Types of forms</h4>
+							<p>All forms begin by being wrapped in a div with a class of <code>form</code>. This div will then need a second class which described what kind of form it is. The available form type classes are:</p>
+							<div class="txt-11 txt-dark-gray"> (click to view form sample)</div>
+							<ul class="standard has-ico list-ico-sm">
+								<li><i class="ico ico-arrow-right-sm ico-simple-dark-gray"></i><a href="#cb-one-column" class="load-form"><code>form.<em>one-column</em></code></a></li> 
+								<li><i class="ico ico-arrow-right-sm ico-simple-dark-gray"></i><a href="#cb-one-column-liquid" class="load-form"><code>form.one-column.<em>liquid</em></code></a></li> 
+								<li><i class="ico ico-arrow-right-sm ico-simple-dark-gray"></i><a href="#cb-one-column-liquid-sidebar" class="load-form"><code>form.one-column.liquid.<em>sidebar</em></code></a></li> 
+								<li><i class="ico ico-arrow-right-sm ico-simple-dark-gray"></i><a href="#cb-two-column" class="load-form"><code>form.<em>two-column</em></code></a></li> 
+								<li><i class="ico ico-arrow-right-sm ico-simple-dark-gray"></i><a href="#cb-three-column" class="load-form"><code>form.<em>three-column</em></code></a></li> 
+								<li><i class="ico ico-arrow-right-sm ico-simple-dark-gray"></i><a href="#cb-cta" class="load-form"><code>form.<em>cta</em></code></a></li> 
+								<li><i class="ico ico-arrow-right-sm ico-simple-dark-gray"></i><a href="#cb-cta-lp" class="load-form"><code>form.cta.<em>lp</em></code></a></li> 
+							</ul>
+
+							<p>The structure of the modules differs slightly depending on what type of form is being used, but there are common elements within all forms.</p>
+						</div>
+						<div class="section-wrap usage" id="form-title">
+							<h4 class="txt-13">Form Title</h4>
+							<p>If a form requires it, a div with a class of <code>form-title</code> can be added before the inner div. Sidebar and CTA forms do not typically require this. In this div you can add an h3 tag containing the form title. On the examples below there is also a border div as well.</p>
+							<div class="codeBlock">
+<pre>&lt;div class="form-title has-bdr"&gt;
+	&lt;h3&gt;Please complete the form below&lt;/h3&gt;
+	&lt;b class="bdr bdr-bottom bdr-dash"&gt;&lt;/b&gt; 
+&lt;/div&gt; </pre>
+								</div>
+							</div>
+
+							<div class="section-wrap usage" id="formbox-and-confbox">
+								<h4 class="txt-13">FormBox / ConfBox</h4>
+								<p>The convention here is unchanged. All forms require at least a div with a class of <code>formBox</code>. If there is custom confirmation content then it will also require a div with a class of <code>confBox</code>. If the form is a demo form, it will also require a <code>success</code> div and a <code>maint</code> div.</p>
+
+								<h4 class="txt-13">Demo Confirmations</h4>
+								<p>Demo confirmations specifically have a consistent structure. They contain a list with two steps that has a class of <span class="txt-blue"><strong>list-steps</strong></span>. The first steps has the login credentials which consist of these elements:</p>
+								<ul class="has-ico standard">
+									<li><i class="ico ico-bullet"></i><strong>div.cred-wrap</strong> - This div contains a credential</li>
+									<li><i class="ico ico-bullet"></i><strong>span.cred-title</strong> - A span that contains the title for the credential (User or ID Password)</li>
+									<li><i class="ico ico-bullet"></i><strong>div.cred</strong> - This wraps the span with the credential (span.demoUsername or span.demoPassword)</li>
+								</ul>
+							</div>
+
+							<div class="section-wrap usage" id="form-cells">
+								<h4 class="txt-13">Form cells</h4>
+								<p>Directly within the <code>&lt;form&gt;</code> tag, a form will contain one or many <code>form-cell</code>s. These form cells are the building blocks of your form, and can contain text fields, radio buttons, checkboxes, paragraphs, lists or anything else you need in your form. </p>
+								<div class="codeBlock">
+<pre>&lt;div class="form-cell"&gt;
+	&lt;label&gt;...&lt;/label&gt;
+	&lt;input ...&gt;
+	&lt;/div&gt;
+	&lt;div class="form-cell"&gt;
+	&lt;p&gt;...&lt;/p&gt;
+&lt;/div&gt;</pre>
+									</div>
+									<h4 class="txt-13">Modifying form cells</h4>
+									<p>A form-cell has a set width connected to each type of form. For example, a form-cell in a three-column form is 300px wide, causing the form-cells to stack neatly next to each other to fill up a row. If, however, you need a form-cell to span the entire width of your three-column form, add a <code>three-column</code> class, like so:</p>
+									<div class="codeBlock">
+<pre>&lt;div class="form-cell <strong>three-column</strong>"&gt;
+	This form-cell spans the entire width of my form
+&lt;/div&gt;</pre>
+										</div>
+										<p>Note that adding a three-column form-cell within a one-column form will not work.</p>
+									</div>
+
+									<div class="section-wrap usage" id="section-titles">
+										<h4 class="txt-13">Section titles</h4>
+										<p>If you have a subsection that needs a title within the form (for example "Joint account information"), wrap that element in a <code>form-section-title</code>:</p>
+										<div class="codeBlock">
+<pre>&lt;h4 class="form-section-title"&gt;Joint Account Information&lt;/div&gt;</pre>
+										</div>
+										<p>OR</p>
+										<div class="codeBlock">
+<pre>&lt;label class="for-text <strong>label-section-title</strong>"&gt;Some other section title name&lt;/label&gt;</pre>
+										</div>
+									</div>
+
+									<div class="section-wrap usage" id="labels">
+										<h4 class="txt-13">Labels</h4>
+										<p>Labels get a specific class, depending on what type of field they're for. The options are:</p>
+										<ul class="standard has-ico list-ico-sm">
+											<li><i class="ico ico-arrow-right-sm ico-simple-dark-gray"></i><code>&lt;label class="<em>for-text</em>"&gt;</code></li> 
+											<li><i class="ico ico-arrow-right-sm ico-simple-dark-gray"></i><code>&lt;label class="<em>for-select</em>"&gt;</code></li> 
+											<li><i class="ico ico-arrow-right-sm ico-simple-dark-gray"></i><code>&lt;label class="<em>for-radio</em>"&gt;</code></li> 
+											<li><i class="ico ico-arrow-right-sm ico-simple-dark-gray"></i><code>&lt;label class="<em>for-checkbox</em>"&gt;</code></li> 
+										</ul>
+										<p>All the above labels will get the default font styling. To modify the styles of a specific label, add one of the following classes:</p>
+										<ul class="standard has-ico list-ico-sm">
+											<li>"Regular text": <i class="ico ico-arrow-right-sm ico-simple-dark-gray"></i><code>txt-regular</code></li> 
+											<li>"<span class="txt-11 txt-Verdana-bold">Bold text</span>": <i class="ico ico-arrow-right-sm ico-simple-dark-gray"></i><code>txt-bold</code></li> 
+										</ul>
+
+										<div class="codeBlock">
+<pre>&lt;label class="for-text <strong>txt-regular</strong>" ...&gt;
+	This type of style is good for sequential radio buttons
+&lt;/label&gt;</pre>
+											</div>
+
+											<div class="codeBlock">
+<pre>&lt;label class="for-text <strong>txt-bold</strong>" ...&gt;
+	Use this style for consent checkbox labels
+&lt;/label&gt;</pre>
+												</div>
+
+												<p>Ocassionally, your label will spill to two lines. If this is the case in a two-column or three-column form, you'll need to add a modifier class to the adjacent form-cells, forcing all the fields in that row to align. Use the following classes:</p>
+												<ul class="standard has-ico list-ico-sm">
+													<li><i class="ico ico-arrow-right-sm ico-simple-dark-gray"></i>To match a label that takes up two lines: <code>&lt;div class="form-cell match-label-heightx1"&gt;</code></li> 
+													<li><i class="ico ico-arrow-right-sm ico-simple-dark-gray"></i>To match a label that takes up three lines: <code>&lt;div class="form-cell match-label-heightx2"&gt;</code></li> 
+												</ul>
+											</div>
+
+											<div class="section-wrap usage" id="fields">
+												<h4 class="txt-13">Fields</h4>
+												<p>Labels get a specific class, depending on what type of field they're for. The options are:</p>
+												<p>A standard text field: <p>
+													<div class="codeBlock">
+<pre>&lt;input class="field" .../&gt; </pre>
+													</div>
+													<p>A standard text area: <p>
+														<div class="codeBlock">
+<pre>&lt;input class="field textarea" .../&gt; </pre>
+														</div>
+														<p>A standard select: <p>
+															<div class="codeBlock">
+<pre>&lt;select class="field select" .../&gt; </pre>
+															</div>
+															<p>A standard checkbox <span class="txt-light-grey">(does not require field class)</span>: <p>
+																<div class="codeBlock">
+<pre>&lt;input class="checkbox" .../&gt; </pre>
+																</div>
+																<p>A standard radio button <span class="txt-light-grey">(does not require field class)</span>: <p>
+																	<div class="codeBlock">
+<pre>&lt;input class="radio" .../&gt; </pre>
+																	</div>
+																</div>
+
+																<h3>Additional elements</h3>
+
+																<div class="section-wrap usage" id="additional-elements">
+																	<h3 class="txt-13">Scrollable</h3>
+																	<p class="margin-top"> A div with a fixed height, border and scrollbar, useful for hiding large blocks of legal text in a small space .</p>
+																	<div class="codeBlock">
+<pre>&lt;div class="form-cell three-column"&gt;
+	&lt;div class="scrollable"&gt;...&lt;/div&gt;
+&lt;/div&gt;</pre>
+																		</div>
+
+																		<h3 class="txt-13">Instruction</h3>
+
+																		<p class="margin-top">Small note or message that appears beneath an input field.</p>
+																		<div class="codeBlock">
+<pre>&lt;div class="form-cell"&gt;
+	&lt;label&gt;...&lt;/label&gt;
+	&lt;input ...&gt;
+	&lt;div class="instruction"&gt; ... &lt;/div&gt;
+&lt;/div&gt;</pre>
+																			</div>
+
+																			<h3 class="txt-13">Provider info</h3>
+																			<p>Structure that appears on lod forms ocassionally.</p>
+																			<div class="codeBlock">
+<pre>&lt;div class="form-cell three-column providerInfo"&gt;
+	&lt;div class="clearfix"&gt;
+	&lt;div class="cat"&gt;Category:&lt;/div&gt;
+	&lt;div class="val"&gt;Value&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</pre>
+																				</div>
+																			</div>
+
+																		</article>
+																	</div>
+																</section>
+															</div>
+													</div>  
+
+
+
+<body>
+</html>

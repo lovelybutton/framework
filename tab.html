@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>PROTO: Tabs</title>
+
+	
+	<script src="assets/script/lib.js" type="text/javascript"></script>
+	<script src="assets/script/script.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="assets/css/global.css">
+	
+	<!-- base proto stylesheets and script files -->
+	<script src="assets/script/proto-script.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="assets/css/proto-style.css">
+
+    <style>
+    body{background:#fff;}
+    .inner{padding:17px 21px 0;}
+    </style>
+    <script>
+    $(document).ready(function(){	
+       $(".tabs").tabs(".tabs-content > div");
+   });
+    </script>
+</head>
+
+<body>
+    <div id="global_container">
+        <nav class="pro-nav">
+            <div class="pro-home"><a href="../proto/">Proto Home</a></div>
+            <div class="pro-nav-expandable expandableSet">
+                <dl class="pro-menu">
+                    <dt class="pro-menu-title"><i class="ico ico-menu"></i><div class="title-text">PROTO MENU</div></dt>
+                    <dd class="pro-menu-body clearfix">
+                        <div class="pro-nav-cat">Modules</div>
+                        <div class="pro-nav-cat-wrap">
+                            <ul class="pro-nav-list clearfix">
+                                <li class="pro-nav-background"><a href="background.html">Background</a></li>
+                                <li class="pro-nav-border"><a href="border.html">Border</a></li>
+                                <li class="pro-nav-button"><a href="button.html">Button</a></li>
+                                <li class="pro-nav-expandable-set"><a href="expandable-set.html">Expandable Set</a></li>
+                                <li class="pro-nav-flag"><a href="flag.html">Flag</a></li>
+                                <li class="pro-nav-form"><a href="form.html">Form</a></li>
+                                <li class="pro-nav-grid"><a href="grid.html">Grid</a></li>
+                              </ul>
+                            </div>
+                            <div class="pro-nav-cat-wrap">
+                              <ul class="pro-nav-list clearfix">
+                                <li class="pro-nav-icon"><a href="icon.html">Icon</a></li>
+                                <li class="pro-nav-modal"><a href="modal.html">Modal</a></li>
+                                <li class="pro-nav-tab current"><a href="tab.html">Tab</a></li>
+                                <li class="pro-nav-table"><a href="table.html">Table</a></li>
+                                <li class="pro-nav-thumbnail"><a href="thumbnail.html">Thumbnail</a></li>
+                                <li class="pro-nav-typography"><a href="typography.html">Typography</a></li>
+                                
+                            </ul>
+
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+        </nav>
+
+        <div class="rowGroup mainContent" id="mc">
+          <section class="row pattern-C">
+             <div class="row-inner">
+                <article class="C">
+                   <h1>Tabs</h1>
+
+                   <h2>Action Tabs</h2>
+                   <div class="action-tabs-wrap">
+                       <div class="tabs action-tabs contains-3">
+                           <a class="unit has-ico">
+                               <i class="ico ico-simple-blue ico-arrow-right-sm swap-on-current ico-swap-dark-grey ico-swap-arrow-down-sm"></i>
+                               Tab 1
+                           </a>
+                           <a class="unit has-ico">
+                               <i class="ico ico-simple-blue ico-arrow-right-sm swap-on-current ico-swap-dark-grey ico-swap-arrow-down-sm"></i>
+                               Tab 2
+                           </a>
+                           <a class="unit has-ico">
+                               <i class="ico ico-simple-blue ico-arrow-right-sm swap-on-current ico-swap-dark-grey ico-swap-arrow-down-sm"></i>
+                               Tab 3
+                           </a>
+                       </div>
+                       <div class="tabs-content">
+                           <div class="inner">
+                               <h3 class="flush-top">Tab 1</h3>
+                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et ligula nunc, id laoreet eros. Cras libero dolor, scelerisque vel tristique quis, tristique a leo. Nullam non erat sit amet nisi facilisis venenatis. In hac habitasse platea dictumst. Etiam convallis est faucibus mi eleifend vel accumsan ipsum placerat. Duis tincidunt sagittis dui, sed fringilla odio vulputate eu.</p>
+                               <p>Mauris vitae quam in risus convallis laoreet. Suspendisse potenti. Maecenas quis elementum turpis. Proin a magna erat. Sed in lorem dolor. Integer placerat feugiat ultrices. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Fusce nisl est, aliquam sit amet venenatis eget, fermentum eget dui.</p>
+                           </div>
+                           <div class="inner">
+                               <h3 class="flush-top">Tab 2</h3>
+                               <p>Duis scelerisque, massa et laoreet fringilla, sem ante pulvinar tellus, id venenatis orci massa eget metus. Praesent at orci suscipit magna faucibus fermentum. Aliquam auctor lobortis lectus pharetra ornare. Nam tellus nisl, ullamcorper non vulputate scelerisque, mollis eu enim. Phasellus placerat, orci at mollis tincidunt, leo magna sodales augue, nec tincidunt tortor massa et augue. Suspendisse lacinia, nisl a blandit lobortis, arcu velit mollis lorem, eget scelerisque lectus sem blandit ligula.</p>
+                               <p>Integer condimentum purus orci. Ut dignissim, purus dapibus posuere porta, sapien mi auctor nisl, sit amet condimentum turpis diam id neque. Mauris faucibus felis vel sem semper eget fermentum turpis condimentum. Quisque quis nibh dui.</p>
+                           </div>
+                           <div class="inner">
+                               <h3 class="flush-top">Tab 3</h3>
+                               <p>Ut eleifend rutrum lorem, id feugiat leo accumsan quis. Donec in mi quam. Proin nec lorem ligula. Vestibulum velit est, sodales non dictum eget, molestie sed dolor. Vestibulum hendrerit fringilla lacus, eu tempus ante sagittis eget. Aenean vitae sapien ipsum. Vivamus porttitor lacus ante. Nullam iaculis tortor id turpis ultrices gravida.</p>
+                               <p>Duis lorem ipsum, vestibulum ut sollicitudin elementum, ultrices eget est. Proin at fermentum orci. Donec erat est, accumsan non egestas ac, rutrum ac erat. Donec et enim quam. Donec congue mattis sagittis. Aliquam metus felis, varius vitae facilisis nec, venenatis nec ante. Sed rhoncus adipiscing tincidunt. Suspendisse porta sagittis erat in porttitor.</p>
+                           </div>
+                       </div>
+                   </div>
+
+                   <h2>Action Header</h2>
+                   <div class="table-wrap action-tabs-wrap">
+                       <div class="action-header">Lorem Ipsum dolor <a class="has-ico" href="#"><i class="ico ico-simple-blue ico-arrow-right-sm"></i>View all</a></div>
+                       <table>
+                        <tr>
+                            <td>Sit amet arcu</td>
+                            <td>Phasellus imperdiet</td>
+                            <td>Sed a mollis tortor</td>
+                            <td>Proin ipsum erat</td>
+                        </tr>
+                        <tr class="light">
+                            <td>Aliquam in urna</td>
+                            <td>Quisque convallis tortor</td>
+                            <td>Dolor arcu risus</td>
+                            <td>In ultricies commodo</td>
+                        </tr>
+                        <tr>
+                            <td>Fusce ac augue quis</td>
+                            <td>Aenean at leo dolor</td>
+                            <td>Morbi risus massa</td>
+                            <td>Pellentesque habitant</td>
+                        </tr>
+                        <tr class="light">
+                            <td>Curabitur sit amet</td>
+                            <td>Praesent in orci nisi</td>
+                            <td>Sed consequat tellus</td>
+                            <td>Pellentesque odio nunc</td>
+                        </tr>
+                    </table>
+                </div>
+
+
+            </article>
+
+        </div>
+    </section>
+</div>
+</div>
+
+</body>

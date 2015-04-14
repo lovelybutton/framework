@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>PROTO: Tables</title>
+
+	
+	<script src="assets/script/lib.js" type="text/javascript"></script>
+	<script src="assets/script/script.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="assets/css/global.css">
+	
+	<!-- base proto stylesheets and script files -->
+	<script src="assets/script/proto-script.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="assets/css/proto-style.css">
+</head>
+
+<body>
+	<div id="global_container">
+		<nav class="pro-nav">
+			<div class="pro-home"><a href="../proto/">Proto Home</a></div>
+			<div class="pro-nav-expandable expandableSet">
+				<dl class="pro-menu">
+					<dt class="pro-menu-title"><i class="ico ico-menu"></i><div class="title-text">PROTO MENU</div></dt>
+					<dd class="pro-menu-body clearfix">
+						<div class="pro-nav-cat">Modules</div>
+						<div class="pro-nav-cat-wrap">
+							<ul class="pro-nav-list clearfix">
+								<li class="pro-nav-background"><a href="background.html">Background</a></li>
+								<li class="pro-nav-border"><a href="border.html">Border</a></li>
+								<li class="pro-nav-button"><a href="button.html">Button</a></li>
+								<li class="pro-nav-expandable-set"><a href="expandable-set.html">Expandable Set</a></li>
+								<li class="pro-nav-flag"><a href="flag.html">Flag</a></li>
+								<li class="pro-nav-form"><a href="form.html">Form</a></li>
+								<li class="pro-nav-grid"><a href="grid.html">Grid</a></li>
+								</ul>
+						</div>
+						<div class="pro-nav-cat-wrap">
+							<ul class="pro-nav-list clearfix">
+								<li class="pro-nav-icon"><a href="icon.html">Icon</a></li>
+								<li class="pro-nav-modal"><a href="modal.html">Modal</a></li>
+								<li class="pro-nav-tab"><a href="tab.html">Tab</a></li>
+								<li class="pro-nav-table current"><a href="table.html">Table</a></li>
+								<li class="pro-nav-thumbnail"><a href="thumbnail.html">Thumbnail</a></li>
+								<li class="pro-nav-typography"><a href="typography.html">Typography</a></li>
+							
+								
+							</ul>
+						</div>
+					</dd>
+				</dl>
+			</div>
+		</nav>
+
+		<div class="rowGroup mainContent" id="mc">
+			<section class="row pattern-C">
+				<div class="row-inner">
+					<article class="C">
+						<h1>Tables</h1>
+
+						<div class="table-wrap">
+							<table class="txt-11">
+								<tr class="table-title">
+									<td colspan="4">Standard Table</td>
+								</tr>
+								<tr>
+									<th>First Column</th>
+									<th>Second Column</th>
+									<th>Third Column</th>
+									<th>Fourth Column</th>
+								</tr>
+								<tr class="gap">
+									<td colspan="4"></td>
+								</tr>
+								<tr>
+									<td>Sit amet arcu</td>
+									<td>Phasellus imperdiet</td>
+									<td>Sed a mollis tortor</td>
+									<td>Proin ipsum erat</td>
+								</tr>
+								<tr class="light">
+									<td>Aliquam in urna</td>
+									<td>Quisque convallis tortor</td>
+									<td>Dolor arcu risus</td>
+									<td>In ultricies commodo</td>
+								</tr>
+								<tr>
+									<td>Fusce ac augue quis</td>
+									<td>Aenean at leo dolor</td>
+									<td>Morbi risus massa</td>
+									<td>Pellentesque habitant</td>
+								</tr>
+								<tr class="light">
+									<td>Curabitur sit amet</td>
+									<td>Praesent in orci nisi</td>
+									<td>Sed consequat tellus</td>
+									<td>Pellentesque odio nunc</td>
+								</tr>
+								<tr class="empty">
+									<td colspan="4"></td>
+								</tr>
+								<tr class="light no-bdr">
+									<td>Empty row above</td>
+									<td>No borders this row</td>
+									<td>Can be applied to cells</td>
+									<td>Otherwise normal</td>
+								</tr>
+							</table>
+						</div>
+
+						<div class="table-wrap">
+							<table class="txt-11 txt-Verdana-bold">
+								<tr class="table-title">
+									<td colspan="4">Table with tall rows, wide borders, and even columns</td>
+								</tr>
+								<tr class="contains-4 wide-bdr">
+									<th class="unit">First Column<br>Second Line</th>
+									<th class="unit">Second Column</th>
+									<th class="unit">Third Column</th>
+									<th class="unit">Fourth Column</th>
+								</tr>
+								<tr class="gap">
+									<td colspan="4"></td>
+								</tr>
+								<tr class="tall-row wide-bdr">
+									<td>Sit amet arcu</td>
+									<td>Phasellus imperdiet</td>
+									<td>Sed a mollis tortor</td>
+									<td>Proin ipsum erat</td>
+								</tr>
+								<tr class="tall-row wide-bdr light">
+									<td>Aliquam in urna</td>
+									<td>Quisque convallis tortor</td>
+									<td>Dolor arcu risus</td>
+									<td>In ultricies commodo</td>
+								</tr>
+								<tr class="tall-row wide-bdr">
+									<td>Fusce ac augue quis</td>
+									<td>Aenean at leo dolor</td>
+									<td>Morbi risus massa</td>
+									<td>Pellentesque habitant</td>
+								</tr>
+								<tr class="tall-row wide-bdr light">
+									<td>Curabitur sit amet</td>
+									<td>Praesent in orci nisi</td>
+									<td>Sed consequat tellus</td>
+									<td>Pellentesque odio nunc</td>
+								</tr>
+							</table>
+						</div>
+
+						<div class="table-wrap">
+							<table class="center">
+								<tr class="table-title">
+									<td colspan="4">Table with centered icons</td>
+								</tr>
+								<tr>
+									<th>First Column</th>
+									<th>Second Column</th>
+									<th>Third Column</th>
+									<th>Fourth Column</th>
+								</tr>
+								<tr class="gap">
+									<td colspan="4"></td>
+								</tr>
+								<tr>
+									<td><i class="ico ico-simple-blue ico-check-lg"></i></td>
+									<td><i class="ico ico-simple-blue ico-arrow-right-circled-lg"></i></td>
+									<td><i class="ico ico-simple-blue ico-arrow-right-lg"></i></td>
+									<td><i class="ico ico-simple-blue ico-triangle-right-lg"></i></td>
+								</tr>
+								<tr class="light">
+									<td><i class="ico ico-simple-yellow ico-check-lg"></i></td>
+									<td><i class="ico ico-simple-yellow ico-arrow-right-circled-lg"></i></td>
+									<td><i class="ico ico-simple-yellow ico-arrow-right-lg"></i></td>
+									<td><i class="ico ico-simple-yellow ico-triangle-right-lg"></i></td>
+								</tr>
+								<tr>
+									<td><i class="ico ico-simple-dark-gray ico-check-lg"></i></td>
+									<td><i class="ico ico-simple-dark-gray ico-arrow-right-circled-lg"></i></td>
+									<td><i class="ico ico-simple-dark-gray ico-arrow-right-lg"></i></td>
+									<td><i class="ico ico-simple-dark-gray ico-triangle-right-lg"></i></td>
+								</tr>
+								<tr class="light">
+									<td><i class="ico ico-simple-light-gray ico-check-lg"></i></td>
+									<td><i class="ico ico-simple-light-gray ico-arrow-right-circled-lg"></i></td>
+									<td><i class="ico ico-simple-light-gray ico-arrow-right-lg"></i></td>
+									<td><i class="ico ico-simple-light-gray ico-triangle-right-lg"></i></td>
+								</tr>
+							</table>
+						</div>
+
+						<p class="note"><strong class="txt-blue">Note:</strong> the dark table style is only used to highlight a columns. This can be done by using a single table in a container of tables and setting it to dark, or applying the dark class to all the cells you want to highlight in a table. <strong>Do not use dark on a full table by itself. Below is just an example.</strong></p>
+						<div class="table-wrap">
+							<table class="dark txt-11 txt-Verdana-bold">
+								<tr class="table-title">
+									<td colspan="4">Dark Table</td>
+								</tr>
+								<tr>
+									<th>First Column</th>
+									<th>Second Column</th>
+									<th>Third Column</th>
+									<th>Fourth Column</th>
+								</tr>
+								<tr class="gap">
+									<td colspan="4"></td>
+								</tr>
+								<tr>
+									<td>Sit amet arcu</td>
+									<td>Phasellus imperdiet</td>
+									<td>Sed a mollis tortor</td>
+									<td>Proin ipsum erat</td>
+								</tr>
+								<tr class="light">
+									<td>Aliquam in urna</td>
+									<td>Quisque convallis tortor</td>
+									<td>Dolor arcu risus</td>
+									<td>In ultricies commodo</td>
+								</tr>
+								<tr>
+									<td>Fusce ac augue quis</td>
+									<td>Aenean at leo dolor</td>
+									<td>Morbi risus massa</td>
+									<td>Pellentesque habitant</td>
+								</tr>
+								<tr class="light">
+									<td>Curabitur sit amet</td>
+									<td>Praesent in orci nisi</td>
+									<td>Sed consequat tellus</td>
+									<td>Pellentesque odio nunc</td>
+								</tr>
+							</table>
+						</div>
+
+						<p class="note"><strong class="txt-blue">Note:</strong> below is the correct usage of the dark style.</p>
+						<div class="table-wrap contains-4">
+							<table class="unit size2of4 txt-11">
+								<tr class="table-title">
+									<td colspan="2">Left Table</td>
+								</tr>
+								<tr>
+									<th>First Column</th>
+									<th>Second Column</th>
+								</tr>
+								<tr class="gap">
+									<td colspan="2"></td>
+								</tr>
+								<tr>
+									<td>Sit amet arcu</td>
+									<td>Phasellus imperdiet</td>
+								</tr>
+								<tr class="light">
+									<td>Aliquam in urna</td>
+									<td>Quisque convallis tortor</td>
+								</tr>
+								<tr>
+									<td>Fusce ac augue quis</td>
+									<td>Aenean at leo dolor</td>
+								</tr>
+								<tr class="light">
+									<td>Curabitur sit amet</td>
+									<td>Praesent in orci nisi</td>
+								</tr>
+							</table>
+							<table class="dark unit txt-11">
+								<tr class="table-title">
+									<td>Middle Table</td>
+								</tr>
+								<tr>
+									<th>Third Column</th>
+								</tr>
+								<tr class="gap">
+									<td></td>
+								</tr>
+								<tr>
+									<td>Sed a mollis tortor</td>
+								</tr>
+								<tr class="light">
+									<td>Dolor arcu risus</td>
+								</tr>
+								<tr>
+									<td>Morbi risus massa</td>
+								</tr>
+								<tr class="light">
+									<td>Sed consequat tellus</td>
+								</tr>
+							</table>
+							<table class="unit txt-11">
+								<tr class="table-title">
+									<td>Right Table</td>
+								</tr>
+								<tr>
+									<th>Fourth Column</th>
+								</tr>
+								<tr class="gap">
+									<td></td>
+								</tr>
+								<tr>
+									<td>Proin ipsum erat</td>
+								</tr>
+								<tr class="light">
+									<td>In ultricies commodo</td>
+								</tr>
+								<tr>
+									<td>Pellentesque habitant</td>
+								</tr>
+								<tr class="light">
+									<td>Pellentesque odio nunc</td>
+								</tr>
+							</table>
+						</div>
+
+						<div class="table-wrap">
+							<table class="txt-11 txt-Verdana-bold">
+								<tr class="table-title">
+									<td colspan="5">Showing hover swaps on icons</td>
+								</tr>
+								<tr class="contains-6">
+									<th class="unit size2of6">Action</th>
+									<th class="center">Example 1</th>
+									<th class="center">Example 2</th>
+									<th class="center">Example 3</th>
+									<th class="center">Example 4</th>
+								</tr>
+								<tr class="gap">
+									<td colspan="5"></td>
+								</tr>
+								<tr class="contains-6">
+									<td class="unit size2of6">Change only color</td>
+									<td class="unit center"><i class="ico ico-simple-blue ico-arrow-right-circled-lg swap-on-hover ico-swap-yellow"></i></td>
+									<td class="unit center"><i class="ico ico-simple-dark-grey ico-arrow-right-lg swap-on-hover ico-swap-blue"></i></td>
+									<td class="unit center"><i class="ico ico-simple-light-grey ico-triangle-right-lg swap-on-hover ico-swap-dark-grey"></i></td>
+									<td class="unit center"><i class="ico ico-simple-yellow ico-check-lg swap-on-hover ico-swap-light-grey"></i></td>
+								</tr>
+								<tr class="contains-6 light">
+									<td class="size2of6">Change only icon</td>
+									<td class="unit center"><i class="ico ico-simple-blue ico-arrow-right-circled-lg swap-on-hover ico-swap-arrow-right-lg"></i></td>
+									<td class="unit center"><i class="ico ico-simple-dark-grey ico-arrow-right-lg swap-on-hover ico-swap-check-lg"></i></td>
+									<td class="unit center"><i class="ico ico-simple-light-grey ico-triangle-right-lg swap-on-hover ico-swap-triangle-down-lg"></i></td>
+									<td class="unit center"><i class="ico ico-simple-yellow ico-check-lg swap-on-hover ico-swap-arrow-up-circled-lg"></i></td>
+								</tr>
+								<tr class="contains-6">
+									<td class="size2of6">Change icon and color</td>
+									<td class="unit center"><i class="ico ico-simple-blue ico-arrow-right-circled-lg swap-on-hover ico-swap-yellow ico-swap-arrow-right-lg"></i></td>
+									<td class="unit center"><i class="ico ico-simple-dark-grey ico-arrow-right-lg swap-on-hover ico-swap-blue ico-swap-check-lg"></i></td>
+									<td class="unit center"><i class="ico ico-simple-light-grey ico-triangle-right-lg swap-on-hover ico-swap-dark-grey ico-swap-triangle-down-lg"></i></td>
+									<td class="unit center"><i class="ico ico-simple-yellow ico-check-lg swap-on-hover ico-swap-light-grey ico-swap-arrow-up-circled-lg"></i></td>
+								</tr>
+							</table>
+						</div>
+
+					</article>
+
+				</div>
+			</section>
+		</div>
+	</div>
+
+</body>

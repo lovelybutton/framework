@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>PROTO: Typography</title>
+
+	
+	<script src="assets/script/lib.js" type="text/javascript"></script>
+	<script src="assets/script/script.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="assets/css/global.css">
+
+
+	<!-- base proto stylesheets and script files -->
+	<script src="assets/script/proto-script.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="assets/css/proto-style.css">
+
+	<style type="text/css">
+	h2 {margin-bottom:1.25em;}
+	.classList ul{background:#f5f5f5;padding:2px 10px;}
+	#tool-wrap {border:1px solid #bfc4c8;margin-bottom:3em;border-top:3px solid #0c51a3;}
+	.title{display:block; font:17px/39px 'Opensans-semibold'; color:#fff; background:#0c51a3; padding:0 10px; border-bottom:3px solid #202d3d;}
+	.options-row{background:#f0f3f5; padding:10px; overflow:hidden;}
+	.box{float:left; margin-right:20px; overflow:hidden;}
+	.box.checkbox{padding-top:16px; margin-right:7px; margin-bottom:0;}
+	label{display:block; font:normal 11px/17px Verdana, Geneva, sans-serif; color:#333;}
+	label.for-checkbox{margin:1px 0 0 2px; width: initial;}
+	select{width:100px;}
+	input.checkbox{float:left;}
+	input.text{height:33px; width:50%; font:12px Verdana, sans-serif; padding:7px;color:#8C9BAC;}
+	label.for-text{font:normal 12px/33px Verdana, sans-serif; padding:0 10px 0 0; float:left;}
+	#classes-wrap{font:normal 11px/29px Verdana, sans-serif; display:block; color:#fff; overflow:hidden; background:#8c9bac;}
+	#classes-wrap a{color:#283545;}
+	#classes-wrap span{display:block; padding:0 10px;}
+	.classes-title{background:#283545;}
+	#output-wrap{padding:20px;border-top:1px solid #bfc4c8;}
+	#tool-output-classes{font:normal 11px/25px Verdana, sans-serif;}
+	#tool-output-classes span{background:none repeat scroll 0 0 #fff; border:1px solid #D4E0E8; border-radius:4px; padding:3px 6px; line-height:21px;}
+	</style>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+		var usageToc = [];
+
+		generateFontClasses();
+
+		$('#tool-output').html($('#tool-sample-input').val());
+
+		$('select, input').change(function(){
+			generateFontClasses();
+		});
+		$('#tool-sample-input').keyup(function(){
+			$('#tool-output').html($(this).val());
+		});
+		$('.reset').click(function(){
+			$('select').children('option.default').attr('selected', 'selected');
+			$('input').removeAttr('checked');
+			$('#tool-sample-input').val('The quick brown fox jumps over the lazy dog');
+			$('#tool-sample-input').trigger('keyup');
+			generateFontClasses();
+			return false;
+		});
+		$('#tool-sample-input').blur(function(){
+			if(!$(this).val()){
+				$(this).val('The quick brown fox jumps over the lazy dog');
+				$(this).trigger('keyup');
+			}
+		});
+		$('#tool-sample-input').focus(function(){
+			if($(this).val() == 'The quick brown fox jumps over the lazy dog'){
+				$(this).val('');
+			}
+		});
+
+		$('.toc-item').each(function(){
+			// add "back to top" link at the end of each section
+			$(this).not(':first').before('<div class="toTop"><a href="#top">back to top</a></div>');
+
+			// collect ids to construct table of contents
+			if($(this).attr('id') !== ''){
+				usageToc.push($(this).attr('id')); 
+			}
+		});
+
+		// add table of contents links to DOM
+		$('.toc').append(constructTocItems(usageToc));
+
+	});
+
+	function generateFontClasses(){
+		var appliedClasses = "";
+		var testClasses = "";
+		if($('#tool-font-family').children('option:selected').index() != 1 && $('#tool-font-weight').children('option:selected').index() == 1){
+			$('#tool-font-weight').children('option:eq(2)').attr('selected', 'selected');
+		}
+		$('#tool-wrap select').each(function(index){
+			if($(this).attr('name') == "tool-font-family"){
+				appliedClasses += $(this).children('option:selected').val() + "-";
+				testClasses += "<span>" + $(this).children('option:selected').val() + "-";
+			}
+			else if($(this).attr('name') == "tool-font-weight"){
+				appliedClasses += $(this).children('option:selected').val() + " ";
+				testClasses += $(this).children('option:selected').val() + "</span>&nbsp;";
+			}
+			else{
+				appliedClasses += $(this).children('option:selected').val() + " ";
+				testClasses += "<span>" + $(this).children('option:selected').val() + "</span>&nbsp;";
+			}
+		});
+		$('#tool-wrap input:checked').each(function(index){
+			appliedClasses += $(this).attr('name') + " ";
+			testClasses += "<span>" + $(this).attr('name') + "</span>&nbsp;";
+		});
+
+		appliedClasses = appliedClasses.slice(0, appliedClasses.length - 1);
+		testClasses = testClasses.slice(0, testClasses.length - 6);
+
+		$('#tool-output-classes').html(testClasses);
+		$('#tool-output').removeClass();
+		$('#tool-output').addClass(appliedClasses);
+	}
+
+	function constructTocItems(items) {
+		var links = $();
+		for (var i = 0; i < items.length; i++) {
+			var el = document.createElement('li');
+			var link = document.createElement('a');
+			link.href = ('#' + items[i]);
+			var linkText = document.createTextNode(items[i].replace(/-/g, ' '));
+
+			link.appendChild(linkText);
+			el.appendChild(link);
+
+			links = links.add($(el));
+		}
+		return links;
+	}
+	</script>
+
+</head>
+
+<body>
+	<div id="global_container">
+		<nav class="pro-nav">
+			<div class="pro-home"><a href="../proto/">Proto Home</a></div>
+			<div class="pro-nav-expandable expandableSet">
+				<dl class="pro-menu">
+					<dt class="pro-menu-title"><i class="ico ico-menu"></i><div class="title-text">PROTO MENU</div></dt>
+					<dd class="pro-menu-body clearfix">
+						<div class="pro-nav-cat">Modules</div>
+						<div class="pro-nav-cat-wrap">
+							<ul class="pro-nav-list clearfix">
+								<li class="pro-nav-background"><a href="background.html">Background</a></li>
+								<li class="pro-nav-border"><a href="border.html">Border</a></li>
+								<li class="pro-nav-button"><a href="button.html">Button</a></li>
+								<li class="pro-nav-expandable-set"><a href="expandable-set.html">Expandable Set</a></li>
+								<li class="pro-nav-flag"><a href="flag.html">Flag</a></li>
+								<li class="pro-nav-form"><a href="form.html">Form</a></li>
+								<li class="pro-nav-grid"><a href="grid.html">Grid</a></li>
+								</ul>
+						</div>
+						<div class="pro-nav-cat-wrap">
+							<ul class="pro-nav-list clearfix">
+								<li class="pro-nav-icon"><a href="icon.html">Icon</a></li>
+								<li class="pro-nav-modal"><a href="modal.html">Modal</a></li>
+								<li class="pro-nav-tab"><a href="tab.html">Tab</a></li>
+								<li class="pro-nav-table"><a href="table.html">Table</a></li>
+								<li class="pro-nav-thumbnail"><a href="thumbnail.html">Thumbnail</a></li>
+								<li class="pro-nav-typography current"><a href="typography.html">Typography</a></li>
+							
+								
+							</ul>
+						</div>
+					</dd>
+				</dl>
+			</div>
+		</nav>
+
+		<div class="rowGroup mainContent" id="mc">
+			<section class="row pattern-C">
+				<div class="row-inner">
+					<article class="C has-toc">
+						<h1 class="margin-bottom">Typography</h1>
+
+						<div class="toc-wrap usage">
+							<p class="toc-title">Table of Contents:</p>
+							<ul class="toc list-inline-block"></ul>
+						</div>
+						<h2>Understanding typography in Proto</h2>
+						<h3 class="lead-in">This page will help guide you through styling almost any text. It is marked up so you can inspect and reference any element on the page, or use the tool below to quickly generate the classes you need.</h3>
+
+
+						<h2 class="toc-item" id="type-tool">Typography tool</h2>
+
+						<div id="tool-wrap">
+							<div class="options-row">
+								<div class="box">
+									<label for="tool-font-size">Font Size</label>
+									<select name="tool-font-size" id="tool-font-size">
+										<option value="txt-10">Size 10</option>
+										<option value="txt-11">Size 11</option>
+										<option value="txt-12">Size 12</option>
+										<option value="txt-13">Size 13</option>
+										<option value="txt-14" class="default" selected>Size 14</option>
+										<option value="txt-15">Size 15</option>
+										<option value="txt-17">Size 17</option>
+										<option value="txt-18">Size 18</option>
+										<option value="txt-25">Size 25</option>
+									</select>
+								</div>
+								<div class="box">
+									<label for="tool-font-family">Font Family</label>
+									<select name="tool-font-family" id="tool-font-family">
+										<option value="txt-Verdana" class="default" selected>Verdana</option>
+										<option value="txt-Opensans">Open Sans</option>
+										<option value="txt-Arial">Arial</option>
+									</select>
+								</div>
+								<div class="box">
+									<label for="tool-font-weight">Font Weight</label>
+									<select name="tool-font-weight" id="tool-font-weight">
+										<option value="regular" class="default" selected>Regular</option>
+										<option value="semibold">Semibold</option>
+										<option value="bold">Bold</option>
+									</select>
+								</div>
+								<div class="box">
+									<label for="tool-font-color">Font Color</label>
+									<select name="tool-font-color" id="tool-font-color">
+										<option value="txt-dark-grey" class="default" selected>Dark Grey</option>
+										<option value="txt-light-grey">Light Grey</option>
+										<option value="txt-blue">Blue</option>
+										<option value="txt-yellow">Yellow</option>
+									</select>
+								</div>
+								<div class="box checkbox">
+									<input type="checkbox" class="checkbox" name="txt-caps" id="txt-caps">
+									<label for="txt-caps" class="for-checkbox">All Caps</label>
+								</div>
+								<div class="box checkbox">
+									<input type="checkbox" class="checkbox" name="txt-underline" id="txt-underline">
+									<label for="txt-underline" class="for-checkbox">Underline</label>
+								</div>
+							</div>
+							<div class="options-row">
+								<label for="tool-sample-input" class="for-text">Sample text:</label>
+								<input name="tool-sample-input" class="text" id="tool-sample-input" value="The quick brown fox jumps over the lazy dog">
+							</div>
+							<div id="output-wrap">
+								<span id="tool-output" class=""></span>
+							</div>
+							<span id="classes-wrap"> <span class="classes-title floatL">Applied classes:</span>  <span class="floatR"><a href="#" class="reset">reset</a></span> </span>
+							<div class="options-row">
+								<div id="tool-output-classes"></div>
+							</div>
+						</div>	
+
+						<h2 class="toc-item" id="styling-text">Styling Text</h2>
+						<p>Font styling is achieved by adding established classes to text elements. It should now almost never be necessary to create additional classes to modify styling for text elements that exist inside body content. There are elements that have default styles, such as headings and paragraphs, which will occassionally need to be altered with the pre-defined convenience classes. These classes can be added to any text element to override that element's default styling.</p>
+						<h2 class="toc-item" id="class-modifiers">Text-modifying classes</h2>
+						<p>Let's have a look at the conventions for commonly used text classes. These can be added to any tag that contains text, at any level:</p>
+						
+						<ul class="standard has-ico">
+							<li><i class="ico ico-simple-yellow ico-bullet"></i><span class="txt-blue"><strong>.txt-{size} :</strong> <span class="txt-11">(e.g. .txt-15)</span></span> This sets the font size of the element in pixels.
+								<div class="expandableSet classList txt-11">
+									<dl>
+										<dt class="txt-light-gray has-ico txt-underline">View supported classes <i class="ico ico-simple-light-gray ico-triangle-right-sm"></i></dt>
+										<dd>
+											<ul class="txt-dark-gray">
+												<li>.txt-10</li>
+												<li>.txt-11</li>
+												<li>.txt-12</li>
+												<li>.txt-13</li>
+												<li>.txt-14</li>
+												<li>.txt-15</li>
+												<li>.txt-17</li>
+												<li>.txt-18</li>
+												<li>.txt-25</li>
+											</ul>
+										</dd>
+									</dl>
+								</div>						
+							</li>
+							<li><i class="ico ico-simple-yellow ico-bullet"></i><span class="txt-blue"><strong>.txt-{family}-{weight} :</strong> <span class="txt-11">(e.g. .txt-Opensans-bold)</span></span> This sets the font family <strong>and</strong> weight for an element. For simple bolding use the &lt;strong&gt; tag.
+								<div class="expandableSet classList txt-11">
+									<dl>
+										<dt class="txt-light-gray has-ico txt-underline">View supported classes <i class="ico ico-simple-light-gray ico-triangle-right-sm"></i></dt>
+										<dd>
+											<ul class="txt-dark-gray">
+												<li>.txt-Opensans-regular</li>
+												<li>.txt-Opensans-semibold</li>
+												<li>.txt-Opensans-bold</li>
+												<li>.txt-Arial-regular</li>
+												<li>.txt-Arial-bold</li>
+												<li>.txt-Verdana-regular</li>
+												<li>.txt-Verdana-bold</li>
+											</ul>
+										</dd>
+									</dl>
+								</div>						
+							</li>
+							<li><i class="ico ico-simple-yellow ico-bullet"></i><span class="txt-blue"><strong>.txt-{color-name} :</strong> <span class="txt-11">(e.g. .txt-yellow)</span></span> This sets the color for an element based on a set of pre-defined colors names.
+								<div class="expandableSet classList txt-11">
+									<dl>
+										<dt class="txt-light-gray has-ico txt-underline">View supported classes <i class="ico ico-simple-light-gray ico-triangle-right-sm"></i></dt>
+										<dd>
+											<ul class="txt-dark-gray">
+												<li>.txt-dark-gray / .txt-dark-grey</li>
+												<li>.txt-light-gray / .txt-light-grey</li>
+												<li>.txt-blue</li>
+												<li>.txt-yellow</li>
+												<li>.txt-white</li>
+											</ul>
+										</dd>
+									</dl>
+								</div>						
+							</li>
+							<li><i class="ico ico-simple-yellow ico-bullet"></i><span class="txt-blue"><strong>.txt-{variant} :</strong> <span class="txt-11">(e.g. .txt-caps)</span></span> This sets the special styling for an element. Types of variants would be caps (uppercase), underline, highlight, etc.
+								<div class="expandableSet classList txt-11">
+									<dl>
+										<dt class="txt-light-gray has-ico txt-underline">View supported classes <i class="ico ico-simple-light-gray ico-triangle-right-sm"></i></dt>
+										<dd>
+											<ul class="txt-dark-gray">
+												<li>.txt-caps</li>
+												<li>.txt-underline</li>
+												<li>.txt-align-right</li>
+											</ul>
+										</dd>
+									</dl>
+								</div>						
+							</li>
+						</ul>
+						<p>Each of the conventions above contains a class that does not typically need to be explicitly added to an element, as it represents the default text styling. The only time you would use these classes is to reset the styling of an element that has a non-standard styling:</p>
+						<ul class="standard has-ico">
+							<li><i class="ico ico-bullet"></i><span class="txt-blue"><strong>.txt-12 :</strong></span> Size 12 is the default styling for body text.</li>
+							<li><i class="ico ico-bullet"></i><span class="txt-blue"><strong>.txt-Verdana-regular :</strong></span> Normally weighted Verdana is the default family and weight for body text.</li>
+							<li><i class="ico ico-bullet"></i><span class="txt-blue"><strong>.txt-dark-grey :</strong></span> Dark grey is the default color for body text.</li>
+						</ul>
+						<p>There is also a special link class which can be used for <a href="#" class="highlight">important links</a> within body text. The class for this link is <strong>.highlight</strong>.</p>
+						<p>There are a few more classes that can be used to reset styling of an element. These would be in cases where either the element has non-standard styling for its location, or if you need to change styling of an element that is nested inside another element that has non-standard styling.</p>
+						<ul class="standard has-ico">
+							<li><i class="ico ico-bullet"></i><span class="txt-blue"><strong>.txt-no-caps :</strong></span> This will remove the uppercase transform.</li>
+							<li><i class="ico ico-bullet"></i><span class="txt-blue"><strong>.txt-auto-height :</strong></span> Resets line-height to "normal".</li>
+							<li><i class="ico ico-bullet"></i><span class="txt-blue"><strong>a.reset :</strong></span> Removes default underline and color from a link. This is useful when wrapping an &lt;a&gt; around block-level elements.</li>
+							<li><i class="ico ico-bullet"></i><span class="txt-blue"><strong>a.invert-underline :</strong></span> For links, displays underline on only hover.</li>
+						</ul>
+						
+						<h2 class="toc-item" id="lists">List types</h2>
+						<h3>Standard Unordered Lists</h3>
+                 <p>Adding the class <strong>.standard</strong> to a list will give it margin and padding consistent with the design of Proto. Adding the class <strong>.has-ico</strong> to a list will prepare it to accept icons as bullets. By default, standard lists will have no icons or bullets. To create bullets you will need to add an icon to each list item. The standard bullet icon has a class of <strong>.ico-bullet</strong>. See the example below:</p>
+                 <ul class="standard has-ico">
+                  <li><i class="ico ico-bullet"></i>The icon in this list item has only the classes <strong>.ico</strong> and <strong>.ico-bullet</strong></li>
+                  <li><i class="ico ico-bullet ico-simple-blue"></i>The icon in this list has an additional class of <strong>.ico-simple-blue</strong></li>
+                  <li><i class="ico ico-bullet ico-simple-yellow"></i>The icon in this list has an additional class of <strong>.ico-simple-yellow</strong></li>
+                  <li><i class="ico ico-bullet ico-simple-light-grey"></i>The icon in this list has an additional class of <strong>.ico-simple-light-grey</strong></li>
+              </ul>
+
+              <h3>Unordered Lists with Simple Icons</h3>
+              <p>To add icons which are represented on <a href="icon.html">icon.html</a> you will first need to determine which size icon from the simple icons is required. Valid sizes are small, medium and large. <span class="txt-yellow txt-caps"><strong>Extra large icons are not supported in lists. You cannot mix different size icons in the same list.</strong></span> Once the required size is determined you will need to give the list an additional class of <strong>.list-ico-sm</strong>, <strong>.list-ico-md</strong>, or <strong>.list-ico-lg</strong>.</p>
+
+              <h4 class="txt-light-grey">Small Icons</h4>
+              <ul class="flush-top standard has-ico list-ico-sm">
+               <li><i class="ico ico-simple-blue ico-arrow-right-sm"></i>This list has an additional class of <strong>.list-ico-sm</strong> and all list items have an icon with a class of <strong>.ico-arrow-right-sm</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-right-sm"></i>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ut risus non nunc placerat porta sit amet nec massa.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-right-sm"></i>Aenean sit amet nulla est, vitae ullamcorper mi. Morbi eget nunc nec augue dictum porta.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-right-sm"></i>Quisque ac metus elit, eu pulvinar tellus. Integer velit nisi, accumsan at ultricies vel, mattis at eros. Ut sagittis consequat ipsum a mollis.</li>
+           </ul>
+           <p>Below you can see a list with all possible small icons:</p>
+           <ul class="standard has-ico list-ico-sm">
+               <li><i class="ico ico-simple-blue ico-arrow-right-sm"></i>The icon in this list item has a class of <strong>.ico-arrow-right-sm</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-right-2-sm"></i>The icon in this list item has a class of <strong>.ico-arrow-right-2-sm</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-down-sm"></i>The icon in this list item has a class of <strong>.ico-arrow-down-sm</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-up-sm"></i>The icon in this list item has a class of <strong>.ico-arrow-up-sm</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-check-sm"></i>The icon in this list item has a class of <strong>.ico-check-sm</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-triangle-right-sm"></i>The icon in this list item has a class of <strong>.ico-triangle-right-sm</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-triangle-down-sm"></i>The icon in this list item has a class of <strong>.ico-triangle-down-sm</strong>.</li>
+           </ul>
+
+           <h4 class="txt-light-grey">Medium Icons</h4>
+           <p class="txt-11 txt-light-grey">medium icon lists have 4px additional bottom padding on their list items</p>
+           <ul class="standard has-ico list-ico-md">
+               <li><i class="ico ico-simple-blue ico-arrow-right-md"></i>This list has an additional class of <strong>.list-ico-md</strong> and all list items have an icon with a class of <strong>.ico-arrow-right-md</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-right-md"></i>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ut risus non nunc placerat porta sit amet nec massa.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-right-md"></i>Aenean sit amet nulla est, vitae ullamcorper mi. Morbi eget nunc nec augue dictum porta.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-right-md"></i>Quisque ac metus elit, eu pulvinar tellus. Integer velit nisi, accumsan at ultricies vel, mattis at eros. Ut sagittis consequat ipsum a mollis.</li>
+           </ul>
+           <p>Below you can see a list with all possible medium icons:</p>
+           <ul class="standard has-ico list-ico-md">
+               <li><i class="ico ico-simple-blue ico-arrow-right-md"></i>The icon in this list item has a class of <strong>.ico-arrow-right-md</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-check-md"></i>The icon in this list item has a class of <strong>.ico-check-md</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-plus-md"></i>The icon in this list item has a class of <strong>.ico-plus-md</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-triangle-right-md"></i>The icon in this list item has a class of <strong>.ico-triangle-right-md</strong>.</li>
+           </ul>
+
+           <h4 class="txt-light-grey">Large Icons</h4>
+           <p class="txt-11 txt-light-grey">large icon lists have 8px additional bottom padding on their list items</p>
+           <ul class="standard has-ico list-ico-lg">
+               <li><i class="ico ico-simple-blue ico-arrow-right-lg"></i>This list has an additional class of <strong>.list-ico-lg</strong> and all list items have an icon with a class of <strong>.ico-arrow-right-lg</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-right-lg"></i>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ut risus non nunc placerat porta sit amet nec massa.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-right-lg"></i>Aenean sit amet nulla est, vitae ullamcorper mi. Morbi eget nunc nec augue dictum porta.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-right-lg"></i>Quisque ac metus elit, eu pulvinar tellus. Integer velit nisi, accumsan at ultricies vel, mattis at eros. Ut sagittis consequat ipsum a mollis.</li>
+           </ul>
+           <p>Below you can see a list with all possible large icons:</p>
+           <ul class="standard has-ico list-ico-lg">
+               <li><i class="ico ico-simple-blue ico-arrow-right-lg"></i>The icon in this list item has a class of <strong>.ico-arrow-right-lg</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-right-circled-lg"></i>The icon in this list item has a class of <strong>.ico-arrow-right-circled-lg</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-arrow-down-circled-lg"></i>The icon in this list item has a class of <strong>.ico-arrow-down-circled-lg</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-check-lg"></i>The icon in this list item has a class of <strong>.ico-check-lg</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-circle-lg"></i>The icon in this list item has a class of <strong>.ico-circle-lg</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-plus-lg"></i>The icon in this list item has a class of <strong>.ico-plus-lg</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-triangle-right-lg"></i>The icon in this list item has a class of <strong>.ico-triangle-right-lg</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-triangle-down-lg"></i>The icon in this list item has a class of <strong>.ico-triangle-down-lg</strong>.</li>
+           </ul>
+
+           <h4 class="txt-light-grey">Extra large Icons</h4>
+           <p class="txt-11 txt-light-grey">Extra large icon lists have 12px additional bottom padding on their list items. Beyond this, you will most likely have to create custom styles to modify the spacing and font treatment of your lists. Extra large icon lists will tend to be in banners and other more highly-customized locations.</p>
+           <ul class="standard has-ico list-ico-xl">
+               <li><i class="ico ico-simple-blue ico-plus-xl"></i>This list has an additional class of <strong>.list-ico-xl</strong> and all list items have an icon with a class of <strong>.ico-plus-xl</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-plus-xl"></i>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ut risus non nunc placerat porta sit amet nec massa.</li>
+               <li><i class="ico ico-simple-blue ico-plus-xl"></i>Aenean sit amet nulla est, vitae ullamcorper mi. Morbi eget nunc nec augue dictum porta.</li>
+               <li><i class="ico ico-simple-blue ico-plus-xl"></i>Quisque ac metus elit, eu pulvinar tellus. Integer velit nisi, accumsan at ultricies vel, mattis at eros. Ut sagittis consequat ipsum a mollis.</li>
+           </ul>
+           <p>Below you can see a list with all possible extra large icons:</p> 
+           <ul class="standard has-ico list-ico-xl">
+               <li><i class="ico ico-simple-blue ico-plus-xl"></i>The icon in this list item has a class of <strong>.ico-plus-xl</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-search-xl"></i>The icon in this list item has a class of <strong>.ico-search-xl</strong>.</li>
+               <li><i class="ico ico-simple-blue ico-check-xl"></i>The icon in this list item has a class of <strong>.ico-check-xl</strong>.</li>
+           </ul>
+
+           <h3>Unordered Lists with Complex Icons</h3>
+           <p>A limited number of the <a href="icon.html#complex">complex icons</a> are available to use as list bullets, as well. When using complex icons no additional classes are required for the list. Simply give the list the classes <strong>.standard</strong> and <strong>.has-ico</strong>. The following complex icons are available:</p>
+           <h5>PDF</h5>
+           <ul class="flush-top standard has-ico">
+               <li><i class="ico ico-complex ico-pdf"></i>Suspendisse placerat consectetur ipsum, et porta lacus fermentum id.</li>
+               <li><i class="ico ico-complex ico-pdf"></i>Nulla eu varius enim. Morbi lacus purus, semper eget scelerisque vitae, blandit at dolor.</li>
+               <li><i class="ico ico-complex ico-pdf"></i>Cras ultrices ipsum non odio fermentum volutpat tristique dui pharetra. </li>
+           </ul>
+           <h5>Article Small</h5>
+           <ul class="flush-top standard has-ico">
+               <li><i class="ico ico-complex ico-article-sm"></i>Suspendisse placerat consectetur ipsum, et porta lacus fermentum id.</li>
+               <li><i class="ico ico-complex ico-article-sm"></i>Nulla eu varius enim. Morbi lacus purus, semper eget scelerisque vitae, blandit at dolor.</li>
+               <li><i class="ico ico-complex ico-article-sm"></i>Cras ultrices ipsum non odio fermentum volutpat tristique dui pharetra. </li>
+           </ul>
+           <h5>Resource</h5>
+           <ul class="flush-top standard has-ico">
+               <li><i class="ico ico-complex ico-resource"></i>Suspendisse placerat consectetur ipsum, et porta lacus fermentum id.</li>
+               <li><i class="ico ico-complex ico-resource"></i>Nulla eu varius enim. Morbi lacus purus, semper eget scelerisque vitae, blandit at dolor.</li>
+               <li><i class="ico ico-complex ico-resource"></i>Cras ultrices ipsum non odio fermentum volutpat tristique dui pharetra. </li>
+           </ul>
+           <h5>Info</h5>
+           <ul class="flush-top standard has-ico">
+               <li><i class="ico ico-complex ico-info"></i>Suspendisse placerat consectetur ipsum, et porta lacus fermentum id.</li>
+               <li><i class="ico ico-complex ico-info"></i>Nulla eu varius enim. Morbi lacus purus, semper eget scelerisque vitae, blandit at dolor.</li>
+               <li><i class="ico ico-complex ico-info"></i>Cras ultrices ipsum non odio fermentum volutpat tristique dui pharetra. </li>
+           </ul>
+           <h5>Video Small</h5>
+           <ul class="flush-top standard has-ico">
+               <li><i class="ico ico-complex ico-video-sm"></i>Suspendisse placerat consectetur ipsum, et porta lacus fermentum id.</li>
+               <li><i class="ico ico-complex ico-video-sm"></i>Nulla eu varius enim. Morbi lacus purus, semper eget scelerisque vitae, blandit at dolor.</li>
+               <li><i class="ico ico-complex ico-video-sm"></i>Cras ultrices ipsum non odio fermentum volutpat tristique dui pharetra. </li>
+           </ul>
+           <h3>Ordered Lists</h3>
+           <p>Ordered lists do not require additional markup. Simply add the class <strong>.standard</strong> to the list, and construct the list as you normally would.</p>
+           <ol class="standard">
+               <li>To create a standard unordered list, add the class <strong>.standard</strong> to the ol.</li>
+               <li>This list requires no additional classes or markup.</li> 
+               <li>Fusce placerat luctus pretium.</li>
+               <li>Nunc imperdiet interdum lacinia.</li>
+               <li>Duis sollicitudin lobortis mi, placerat porta tellus dignissim quis.</li>
+               <li>Cras facilisis eleifend augue non porta.</li>
+               <li>Mauris id tortor at nulla lobortis consequat.</li>
+               <li>Praesent feugiat lobortis magna, non commodo mauris posuere ut.</li>
+               <li>Maecenas cursus imperdiet varius.</li>
+               <li>Nulla a sapien justo, eget facilisis neque.</li>
+           </ol>
+
+           <h3>Unordered list with titles on left</h3>
+           <ul class="list-titled-items">
+              <li class="item">
+               <span class="item-title">Titled List</span>
+               <span class="item-body">This is a list that has a title to the left of each list item. The class name is .list-titled-items and each list item must contain two inner elements, <strong>.item-title</strong> and <strong>.item-body</strong>. This list does not require an &lt;i&gt; element since it is replaced with .item-title.</span>
+           </li>
+       </ul>
+
+       <h3>Ordered list with large numbers</h3>
+       <ol class="list-steps list-steps-large">
+          <li class="step">
+           <i class="ico step-num">1</i>
+           <span class="step-title">The title of the list item</span>
+           This list has two classes, <strong>.list-steps</strong> and <strong>.list-steps-large</strong>. It requires the number of the item to be inside the &lt;i&gt; tag, and the title to be inside an element with the .step-title class. After that you can add any content. Simple text does not need to be in an element.
+       </li>
+   </ol>
+
+   <h3>Ordered list with small numbers</h3>
+   <ol class="list-steps list-steps-small">
+      <li class="step">
+       <i class="ico step-num">1</i>
+       <span class="step-title">An obviously smaller list title</span>
+       This list also has two classes, <strong>.list-steps</strong> and <strong>.list-steps-large</strong>. Again, the number of the item goes inside the &lt;i&gt; tag, the .step-title element follows, and then content is added after that.
+   </li>
+</ol>
+
+						<h2 class="toc-item" id="structural-convenience-classes">Margin/padding convenience classes</h2>
+						<p>These are classes that can be used to add or remove default margin/padding for an isolated non-standard style.</p>
+						<ul class="standard has-ico">
+							<li><i class="ico ico-bullet"></i><span class="txt-blue"><strong>.margin-{position} :</strong></span> This will add 21px <strong>margin</strong> to the given position.
+								<div class="expandableSet classList txt-11">
+									<dl>
+										<dt class="txt-light-gray has-ico txt-underline">View supported classes <i class="ico ico-simple-light-gray ico-triangle-right-sm"></i></dt>
+										<dd>
+											<ul class="txt-dark-gray">
+												<li>.margin-top</li>
+												<li>.margin-bottom</li>
+												<li>.margin-right</li>
+												<li>.margin-left</li>
+											</ul>
+										</dd>
+									</dl>
+								</div>						
+							</li>
+							<li><i class="ico ico-bullet"></i><span class="txt-blue"><strong>.padding-{position} :</strong></span> This will add 21px <strong>padding</strong> to the given position.
+								<div class="expandableSet classList txt-11">
+									<dl>
+										<dt class="txt-light-gray has-ico txt-underline">View supported classes <i class="ico ico-simple-light-gray ico-triangle-right-sm"></i></dt>
+										<dd>
+											<ul class="txt-dark-gray">
+												<li>.padding-top</li>
+												<li>.padding-bottom</li>
+												<li>.padding-right</li>
+												<li>.padding-left</li>
+											</ul>
+										</dd>
+									</dl>
+								</div>						
+							</li>
+							<li><i class="ico ico-bullet"></i><span class="txt-blue"><strong>.no-margin-{position} :</strong></span> Removes margin from the given position.
+								<div class="expandableSet classList txt-11">
+									<dl>
+										<dt class="txt-light-gray has-ico txt-underline">View supported classes <i class="ico ico-simple-light-gray ico-triangle-right-sm"></i></dt>
+										<dd>
+											<ul class="txt-dark-gray">
+												<li>.no-margin-top</li>
+												<li>.no-margin-bottom</li>
+												<li>.no-margin-right</li>
+												<li>.no-margin-left</li>
+											</ul>
+										</dd>
+									</dl>
+								</div>						
+							</li>
+							<li><i class="ico ico-bullet"></i><span class="txt-blue"><strong>.no-padding-{position} :</strong></span> Removes padding from the given position.
+								<div class="expandableSet classList txt-11">
+									<dl>
+										<dt class="txt-light-gray has-ico txt-underline">View supported classes <i class="ico ico-simple-light-gray ico-triangle-right-sm"></i></dt>
+										<dd>
+											<ul class="txt-dark-gray">
+												<li>.no-padding-top</li>
+												<li>.no-padding-bottom</li>
+												<li>.no-padding-right</li>
+												<li>.no-padding-left</li>
+											</ul>
+										</dd>
+									</dl>
+								</div>						
+							</li>
+							<li><i class="ico ico-bullet"></i><span class="txt-blue"><strong>.flush-{position} :</strong></span> This will remove <strong>margin and padding</strong> from the given position.
+								<div class="expandableSet classList txt-11">
+									<dl>
+										<dt class="txt-light-gray has-ico txt-underline">View supported classes <i class="ico ico-simple-light-gray ico-triangle-right-sm"></i></dt>
+										<dd>
+											<ul class="txt-dark-gray">
+												<li>.flush-top</li>
+												<li>.flush-bottom</li>
+												<li>.flush-right</li>
+												<li>.flush-left</li>
+											</ul>
+										</dd>
+									</dl>
+								</div>						
+							</li>
+						</ul>
+						<h2 class="toc-item" id="display-convenience-classes">Display convenience classes</h2>
+						<p>These classes can be used to change the css display setting for a unique non-standard element.</p>
+						<ul class="standard has-ico">
+							<li><i class="ico ico-bullet"></i><span class="txt-blue"><strong>.display-{position} :</strong></span> 
+								<div class="expandableSet classList txt-11">
+									<dl>
+										<dt class="txt-light-gray has-ico txt-underline">View supported classes <i class="ico ico-simple-light-gray ico-triangle-right-sm"></i></dt>
+										<dd>
+											<ul class="txt-dark-gray">
+												<li>.display-inline</li>
+												<li>.display-inline-block</li>
+												<li>.display-block</li>
+											</ul>
+										</dd>
+									</dl>
+								</div>						
+							</li>
+							<li><i class="ico ico-bullet"></i><span class="txt-blue"><strong>.list-{setting} :</strong></span> Attach this class to a list to set the style of its child &lt;li&gt;s
+								<div class="expandableSet classList txt-11">
+									<dl>
+										<dt class="txt-light-gray has-ico txt-underline">View supported classes <i class="ico ico-simple-light-gray ico-triangle-right-sm"></i></dt>
+										<dd>
+											<ul class="txt-dark-gray">
+												<li>.list-floatL (list items float left)</li>
+												<li>.list-inline (list items are display:inline)</li>
+												<li>.list-inline-block (list items are display:inline-block)</li>
+											</ul>
+										</dd>
+									</dl>
+								</div>						
+							</li>
+							<li><i class="ico ico-bullet"></i><span class="txt-blue"><strong>.pos-relative :</strong></span> Sets element to position:relative;</li>
+						</ul>
+						
+						<h3>Icon convenience classes</h3>
+						<p class="has-ico"><i class="ico ico-simple-blue ico-check-md"></i>This paragraph tag has a left-aligned, vertically-centered icon. To accomplish this, add the class <strong>.has-ico</strong> to the parent element, in this case a paragraph tag. </p>
+						<a class="has-ico" href="#"><i class="ico ico-complex ico-pdf"></i>This anchor tag contains the class <strong>.has-ico</strong></a>
+					
+					</div>
+
+				</article>
+			</div>
+		</section>
+	</div>
+</div>
+</body>
+
+</html>

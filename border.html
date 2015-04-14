@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>PROTO: Borders</title>
+
+	
+	<script src="assets/script/lib.js" type="text/javascript"></script>
+	<script src="assets/script/script.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="assets/css/global.css">
+	
+	<!-- base proto stylesheets and script files -->
+	<script src="assets/script/proto-script.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="assets/css/proto-style.css">
+
+	<style>
+	.section-wrap#border-tool {border:none;padding:0;}
+	.test-box{width:150px; height:150px; position:relative; font:normal 11px/24px Verdana, Geneva, sans-serif; text-align:center; padding:63px 0; margin:0 20px 20px 0;}
+	.test-box.divided{height:auto; padding:10px 0;}
+	.test-box:hover{background-color:#fafafa;}
+	.test-box.dark{background-color:#1d2837; color:#fff;}
+	.test-box.semi-dark{background-color:#f0f5f6;}
+	
+	body{background:#fff;}
+	#tool-wrap {border:1px solid #bfc4c8;margin-bottom:3em;border-top:3px solid #0c51a3;border-bottom:none;}
+	.options-row{background:#f0f3f5; border-bottom:1px solid #bfc4c8; padding:10px; overflow:hidden;}
+	.box{float:left; margin-right:20px; overflow:hidden;}
+	.box.checkbox{padding-top:16px; margin-right:20px; margin-bottom:0;}
+	label{display:block; font:normal 11px/17px Verdana, Geneva, sans-serif; color:#333;}
+	label.for-checkbox{margin:1px 0 0 22px;}
+	select{width:150px;}
+	input.checkbox{float:left;}
+	label.for-text{font:normal 12px/33px Verdana, sans-serif; padding:0 10px 0 0; float:left;}
+	#markup-wrap{font:normal 11px/29px Verdana, sans-serif; display:block; color:#fff; overflow:hidden; background:#8c9bac;}
+	#markup-wrap a{color:#283545;}
+	#markup-wrap span{display:block; padding:0 10px;}
+	.markup-title{background:#283545;}
+	#output-wrap{padding:20px;}
+	#output-wrap div{width:175px; font:12px/25px Verdana, Geneva, sans-serif; padding:75px 0; text-align:center;}
+	#tool-output-markup{font:normal 11px/25px Verdana, sans-serif;}
+	#tool-output-markup span{background:none repeat scroll 0 0 #fff; border:1px solid #D4E0E8; border-radius:4px; padding:3px 6px; line-height:21px;}
+	</style>
+
+	<script>
+	$(document).ready(function(){
+		generateBorders();
+		
+		$('select').change(function(){
+			generateBorders();
+		});
+		$('.checkbox').click(function(){
+			generateBorders();
+		});
+		$('.reset').click(function(){
+			$('select').children('option').removeAttr('selected');
+			$('select').children('option.default').attr('selected', 'selected');
+			$('.checkbox').removeAttr('checked');
+			generateBorders();
+			return false;
+		});
+	});
+	function generateBorders(){
+		var bdrType = "";
+		var gradType = "";
+		var bdrDivider = false;
+		var gradDivider = false;
+		
+		$('#tool-wrap select').each(function(index){
+			if($(this).children('option:selected').val().length > 0){
+				if($(this).attr('name') == "tool-border-type"){
+					bdrType = $(this).children('option:selected').val();
+				}
+				else{
+					gradType = $(this).children('option:selected').val();
+				}
+				$(this).closest('.options-row').find('.checkbox').show();
+			}
+			else{
+				$(this).closest('.options-row').find('.checkbox').removeAttr('checked').hide();
+			}
+		});
+		
+		var displayMarkup = '&lt;div class="has-bdr"&gt;<br>';
+		var actualMarkup = '<div class="has-bdr">\n';
+		if(bdrType){
+			$('.border-options .checkbox:checked').each(function(index){
+				if($(this).val() != 'bdr-divider'){
+					displayMarkup += '&nbsp;&nbsp;&nbsp;&nbsp;&lt;b class="<span>bdr</span> <span>' + bdrType + '</span> <span>' + $(this).val() + '</span>"&gt;&lt;/b&gt;<br>';
+					actualMarkup += '<b class="bdr ' + bdrType + ' ' + $(this).val() + '"></b>';
+				}
+				else{
+					bdrDivider = true;
+				}
+			});
+		}
+		if(gradType){
+			$('.gradient-options .checkbox:checked').each(function(index){
+				if($(this).val() != 'bdr-divider'){
+					displayMarkup += '&nbsp;&nbsp;&nbsp;&nbsp;&lt;b class="<span>bdr</span> <span>' + gradType + '</span> <span>' + $(this).val() + '</span>"&gt;&lt;/b&gt;<br>';
+					actualMarkup += '<b class="bdr ' + gradType + ' ' + $(this).val() + '"></b>';
+				}
+				else{
+					gradDivider = true;
+				}
+			});
+		}
+		displayMarkup += '&nbsp;&nbsp;&nbsp;&nbsp;Sample text<br>';
+		actualMarkup += 'Sample text';
+		if(bdrDivider){
+			displayMarkup += '&nbsp;&nbsp;&nbsp;&nbsp;&lt;b class="<span>bdr</span> <span>' + bdrType + '</span> <span>bdr-divider</span>"&gt;&lt;/b&gt;<br>';
+			actualMarkup += '<b class="bdr ' + bdrType + ' bdr-divider"></b>';
+		}
+		if(gradDivider){
+			displayMarkup += '&nbsp;&nbsp;&nbsp;&nbsp;&lt;b class="<span>bdr</span> <span>' + gradType + '</span> <span>bdr-divider</span>"&gt;&lt;/b&gt;<br>';
+			actualMarkup += '<b class="bdr ' + gradType + ' bdr-divider"></b>';
+		}
+		displayMarkup += '&lt;/div&gt;';
+		actualMarkup += '</div>';
+		
+		$('#tool-output-markup').html(displayMarkup);
+		$('#output-wrap').html(actualMarkup);
+	}
+	</script>
+</head>
+
+<body>
+<div id="global_container">
+	<nav class="pro-nav">
+        <div class="pro-home"><a href="../proto/">Proto Home</a></div>
+        <div class="pro-nav-expandable expandableSet">
+            <dl class="pro-menu">
+                <dt class="pro-menu-title"><i class="ico ico-menu"></i><div class="title-text">PROTO MENU</div></dt>
+                <dd class="pro-menu-body clearfix">
+                        <div class="pro-nav-cat">Modules</div>
+                    <div class="pro-nav-cat-wrap">
+                        <ul class="pro-nav-list clearfix">
+                            <li class="pro-nav-background"><a href="background.html">Background</a></li>
+                            <li class="pro-nav-border current"><a href="border.html">Border</a></li>
+                            <li class="pro-nav-button"><a href="button.html">Button</a></li>
+                            <li class="pro-nav-expandable-set"><a href="expandable-set.html">Expandable Set</a></li>
+                            <li class="pro-nav-flag"><a href="flag.html">Flag</a></li>
+                            <li class="pro-nav-form"><a href="form.html">Form</a></li>
+                            <li class="pro-nav-grid"><a href="grid.html">Grid</a></li>
+                            </ul>
+						</div>
+						<div class="pro-nav-cat-wrap">
+							<ul class="pro-nav-list clearfix">
+                            <li class="pro-nav-modal"><a href="modal.html">Modal</a></li>
+                            <li class="pro-nav-icon"><a href="icon.html">Icon</a></li>
+                            <li class="pro-nav-tab"><a href="tab.html">Tab</a></li>
+                            <li class="pro-nav-table"><a href="table.html">Table</a></li>
+                            <li class="pro-nav-thumbnail"><a href="thumbnail.html">Thumbnail</a></li>
+                            <li class="pro-nav-typography"><a href="typography.html">Typography</a></li>
+                            
+                        </ul>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+    </nav>
+
+	<div class="rowGroup mainContent" id="mc">
+		<section class="row pattern-C">
+			<div class="row-inner">
+				<article class="C">
+					<h1>Borders and Gradients</h1>
+					<div class="has-toc" id="module-template">
+                        <div class="toc-wrap usage">
+                            <p class="toc-title">Table of Contents:</p>
+                            <ul class="toc list-inline-block"></ul>
+                        </div>
+                        <h2 class="section-title">Border tool</h2>
+                        <div class="section-wrap usage" id="border-tool">
+							<div id="tool-wrap"> 
+								<div class="options-row border-options">
+									<div class="box">
+										<label for="tool-border-type">Border Type</label>
+										<select name="tool-border-type" id="tool-border-type">
+											<option value="" class="default" selected>None</option>
+											<option value="bdr-dot">Dot</option>
+											<option value="bdr-dot-wide">Dot w/ wide spacing</option>
+											<option value="bdr-dot-sm">Small dot</option>
+											<option value="bdr-dash">Dash</option>
+										</select>
+									</div>
+									<div class="box checkbox">
+										<input type="checkbox" class="checkbox" name="bdr-left" id="bdr-left" value="bdr-left">
+										<label for="bdr-left" class="for-checkbox">Left</label>
+									</div>
+									<div class="box checkbox">
+										<input type="checkbox" class="checkbox" name="bdr-right" id="bdr-right" value="bdr-right">
+										<label for="bdr-right" class="for-checkbox">Right</label>
+									</div>
+									<div class="box checkbox">
+										<input type="checkbox" class="checkbox" name="bdr-top" id="bdr-top" value="bdr-top">
+										<label for="bdr-top" class="for-checkbox">Top</label>
+									</div>
+									<div class="box checkbox">
+										<input type="checkbox" class="checkbox" name="bdr-bottom" id="bdr-bottom" value="bdr-bottom">
+										<label for="bdr-bottom" class="for-checkbox">Bottom</label>
+									</div>
+									<div class="box checkbox">
+										<input type="checkbox" class="checkbox" name="bdr-divider" id="bdr-divider" value="bdr-divider">
+										<label for="bdr-divider" class="for-checkbox">Divider</label>
+									</div>
+								</div>
+								<div class="options-row gradient-options">
+									<div class="box">
+										<label for="tool-gradient-type">Gradient Type</label>
+										<select name="tool-gradient-type" id="tool-gradient-type">
+											<option value="" class="default" selected>None</option>
+											<option value="bdr-grad">Normal Gradient</option>
+											<option value="bdr-grad-sm">Small Gradient</option>
+										</select>
+									</div>
+									<div class="box checkbox">
+										<input type="checkbox" class="checkbox" name="grad-left" id="grad-left" value="bdr-left">
+										<label for="grad-left" class="for-checkbox">Left</label>
+									</div>
+									<div class="box checkbox">
+										<input type="checkbox" class="checkbox" name="grad-right" id="grad-right" value="bdr-right">
+										<label for="grad-right" class="for-checkbox">Right</label>
+									</div>
+									<div class="box checkbox">
+										<input type="checkbox" class="checkbox" name="grad-top" id="grad-top" value="bdr-top">
+										<label for="grad-top" class="for-checkbox">Top</label>
+									</div>
+									<div class="box checkbox">
+										<input type="checkbox" class="checkbox" name="grad-bottom" id="grad-bottom" value="bdr-bottom">
+										<label for="grad-bottom" class="for-checkbox">Bottom</label>
+									</div>
+									<div class="box checkbox">
+										<input type="checkbox" class="checkbox" name="grad-divider" id="grad-divider" value="bdr-divider">
+										<label for="grad-divider" class="for-checkbox">Divider</label>
+									</div>
+								</div>
+								<div id="output-wrap">	
+								</div>
+								<span id="markup-wrap"> 
+									<span class="markup-title floatL">Markup:</span>  
+									<span class="floatR"><a href="#" class="reset">reset</a></span> 
+								</span>
+								<div class="options-row">
+									<div id="tool-output-markup"></div>
+								</div>
+							</div>
+						</div>
+
+                        <h2 class="section-title">Overview</h2>
+                        <div class="section-wrap usage" id="overview">
+                        	<h3 class="title">Adding borders and gradients to page elements</h3>
+		                    <p>Borders and gradients have the same conventions for setup. A &lt;b&gt; tag per border or gradient is added within the element that will receive the border. Within this tag the <strong>bdr</strong> class is added. From there the border or gradient is described with modifying classes.</p>
+                        </div>
+
+                        <h2 class="section-title">Borders</h2>
+                        <div class="section-wrap usage" id="borders">
+		                    <p>These are simple borders consisting of dots or dashes.</p>
+		                    <div style="width: 680px;">
+			                    <!-- dotted/dashed variations -->
+			                   	<div class="clearfix">
+				                   	<div class="test-box floatL">
+				                    	<b class="bdr bdr-left bdr-dot"></b>
+				                    	<b class="bdr bdr-top bdr-dot"></b>
+				                    	<b class="bdr bdr-right bdr-dot"></b>
+				                    	<b class="bdr bdr-bottom bdr-dot"></b>
+				                        Dot w/ even spacing
+				                    </div>
+				                    <div class="test-box floatL">
+				                    	<b class="bdr bdr-left bdr-dot-wide"></b>
+				                    	<b class="bdr bdr-top bdr-dot-wide"></b>
+				                    	<b class="bdr bdr-right bdr-dot-wide"></b>
+				                    	<b class="bdr bdr-bottom bdr-dot-wide"></b>
+				                        Dot w/ wide spacing
+				                    </div>
+				                    <div class="test-box floatL">
+				                    	<b class="bdr bdr-left bdr-dot-sm"></b>
+				                    	<b class="bdr bdr-top bdr-dot-sm"></b>
+				                    	<b class="bdr bdr-right bdr-dot-sm"></b>
+				                    	<b class="bdr bdr-bottom bdr-dot-sm"></b>
+				                        Small dot
+				                    </div>
+				                    <div class="test-box floatL">
+				                    	<b class="bdr bdr-left bdr-dash"></b>
+				                    	<b class="bdr bdr-top bdr-dash"></b>
+				                    	<b class="bdr bdr-right bdr-dash"></b>
+				                    	<b class="bdr bdr-bottom bdr-dash"></b>
+				                        Dash
+				                    </div>
+			                   	</div>
+                        	</div>
+                    	</div>
+
+                        <h2 class="section-title">Gradients</h2>
+                        <div class="section-wrap usage" id="gradients">
+		                    <p>These gradients will underlap borders, but are defined the same way.</p>
+		                   	<div class="clearfix">
+			                    <!-- Normal Gradient Variations -->
+			                    <div class="test-box floatL">
+			                    	<b class="bdr bdr-left bdr-grad"></b>
+			                        Left gradient
+			                    </div>
+			                    <div class="test-box floatL">
+			                    	<b class="bdr bdr-top bdr-grad"></b>
+			                        Top gradient
+			                    </div>
+			                    <div class="test-box floatL">
+			                    	<b class="bdr bdr-right bdr-grad"></b>
+			                        Right gradient
+			                    </div>
+			                    <div class="test-box floatL">
+			                    	<b class="bdr bdr-bottom bdr-grad"></b>
+			                        Bottom gradient
+			                    </div>
+							</div>
+		                    <!-- Small Gradient Variations -->
+		                   	<div class="clearfix">
+			                    <div class="test-box floatL">
+			                    	<b class="bdr bdr-left bdr-grad-sm"></b>
+			                        Left small gradient
+			                    </div>
+			                    <div class="test-box floatL">
+			                    	<b class="bdr bdr-top bdr-grad-sm"></b>
+			                        Top small gradient
+			                    </div>
+			                    <div class="test-box floatL">
+			                    	<b class="bdr bdr-right bdr-grad-sm"></b>
+			                        Right small gradient
+			                    </div>
+			                    <div class="test-box floatL">
+			                    	<b class="bdr bdr-bottom bdr-grad-sm"></b>
+			                        Bottom small gradient
+			                    </div>
+		                   </div>
+                    	</div>
+
+
+                        <h2 class="section-title">Dividers</h2>
+                        <div class="section-wrap usage" id="dividers">
+		                    <p>Borders and gradients can also be used to vertically divide content.</p>
+		                    <!-- Dividers -->
+		                   	<div class="clearfix">
+			                    <div class="test-box divided floatL">
+			                        Text above divider
+			                    	<b class="bdr bdr-divider bdr-dot"></b>
+			                        Text below divider
+			                    </div>
+			                    <div class="test-box divided floatL">
+			                        Text above divider
+			                    	<b class="bdr bdr-divider bdr-dot-wide"></b>
+			                        Text below divider
+			                    </div>
+			                    <div class="test-box divided floatL">
+			                        Text above divider
+			                    	<b class="bdr bdr-divider bdr-dot-sm"></b>
+			                        Text below divider
+			                    </div>
+			                    <div class="test-box divided floatL">
+			                        Text above divider
+			                    	<b class="bdr bdr-divider bdr-dash"></b>
+			                        Text below divider
+			                    </div>
+			                </div>
+							<div class="clearfix">
+			                    <div class="test-box divided semi-dark floatR">
+			                        Text above divider
+			                    	<b class="bdr bdr-divider bdr-solid-light-shadow"></b>
+			                        Text below divider
+			                    </div>
+			                    <div class="test-box divided dark floatR">
+			                        Text above divider
+			                    	<b class="bdr bdr-divider bdr-solid-dark-shadow"></b>
+			                        Text below divider
+			                    </div>
+			                    <div class="test-box divided dark floatR">
+			                        Text above divider
+			                    	<b class="bdr bdr-divider bdr-solid-white"></b>
+			                        Text below divider
+			                    </div>
+	                    	</div>
+                    	</div>
+                    </div>
+				</article>
+
+			</div>
+		</section>
+	</div>
+</div>
+
+</body>
